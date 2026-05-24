@@ -6,7 +6,7 @@ import "./OrdersRedesign.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function Orders() {
@@ -54,12 +54,9 @@ function Orders() {
     setDeletingOrderId(orderId);
 
     try {
-      await axios.delete(
-        `${API_BASE_URL}/api/orders/${orderId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      await axios.delete(`${API_BASE_URL}/api/orders/${orderId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       setOrders(orders.filter((order) => order._id !== orderId));
     } catch (err) {
@@ -100,7 +97,10 @@ function Orders() {
           <div className="empty-state">
             <h3>No orders yet</h3>
             <p>When you make your first purchase, it will appear here!</p>
-            <button onClick={() => navigate("/")} className="btn-premium btn-premium-primary">
+            <button
+              onClick={() => navigate("/")}
+              className="btn-premium btn-premium-primary"
+            >
               Start Shopping
             </button>
           </div>
@@ -119,15 +119,16 @@ function Orders() {
                   </div>
                   <div className="qb-order-meta">
                     <div className="qb-order-amount">
-                      ₹
-                      {(order.total_amount || order.total || 0).toFixed(2)}
+                      ₹{(order.total_amount || order.total || 0).toFixed(2)}
                     </div>
                     <button
                       onClick={() => handleDeleteOrder(order._id)}
                       disabled={deletingOrderId === order._id}
                       className="qb-order-delete-btn"
                     >
-                      {deletingOrderId === order._id ? "Deleting..." : "Delete Order"}
+                      {deletingOrderId === order._id
+                        ? "Deleting..."
+                        : "Delete Order"}
                     </button>
                   </div>
                 </div>
@@ -138,10 +139,14 @@ function Orders() {
                     {order.items
                       .filter((item) => item.product)
                       .map((item, index) => (
-                        <div key={item.product._id || index} className="qb-order-item-row">
+                        <div
+                          key={item.product._id || index}
+                          className="qb-order-item-row"
+                        >
                           <div className="qb-order-item-info">
                             <div className="qb-order-item-name">
-                              {item.product?.name || "Product no longer available"}
+                              {item.product?.name ||
+                                "Product no longer available"}
                             </div>
                             <div className="qb-order-item-qty">
                               Quantity: {item.quantity}

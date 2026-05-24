@@ -4,7 +4,7 @@ import axios from "axios";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 const CartContext = createContext();
@@ -29,12 +29,9 @@ export const CartProvider = ({ children }) => {
         return;
       }
 
-      const response = await axios.get(
-        `${API_BASE_URL}/api/cart`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/cart`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       const totalItems = response.data.items.reduce(
         (total, item) => total + item.quantity,

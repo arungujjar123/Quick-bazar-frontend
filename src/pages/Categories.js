@@ -6,7 +6,7 @@ import "./CategoriesRedesign.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function Categories() {
@@ -110,7 +110,15 @@ function Categories() {
           </p>
         </div>
         <div className="qb-categories-search-wrap">
-          <svg className="qb-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            className="qb-search-icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
@@ -134,7 +142,10 @@ function Categories() {
           <span>Products</span>
         </div>
         <div className="qb-stat-item">
-          <strong>{new Set(products.map(p => p.shop?.name).filter(Boolean)).size || "—"}</strong>
+          <strong>
+            {new Set(products.map((p) => p.shop?.name).filter(Boolean)).size ||
+              "—"}
+          </strong>
           <span>Makers</span>
         </div>
       </div>
@@ -142,7 +153,12 @@ function Categories() {
       {/* Category Grid */}
       {categoryCards.length === 0 ? (
         <div className="qb-empty-state">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
             <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <h3>No categories found</h3>
@@ -165,7 +181,9 @@ function Categories() {
                 </div>
                 <div className="qb-category-info">
                   <h2>{card.name}</h2>
-                  <p>{card.count} {card.count === 1 ? "product" : "products"}</p>
+                  <p>
+                    {card.count} {card.count === 1 ? "product" : "products"}
+                  </p>
                 </div>
               </header>
 
@@ -178,10 +196,7 @@ function Categories() {
                 ))}
               </div>
 
-              <Link
-                to={`/?view=shop`}
-                className="qb-category-view-all"
-              >
+              <Link to={`/?view=shop`} className="qb-category-view-all">
                 View All →
               </Link>
             </article>

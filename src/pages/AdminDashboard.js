@@ -6,7 +6,7 @@ import "./AdminShared.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function AdminDashboard() {
@@ -33,9 +33,12 @@ function AdminDashboard() {
   const fetchDashboardStats = async () => {
     const token = localStorage.getItem("adminToken");
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/admin/dashboard-stats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${API_BASE_URL}/api/admin/dashboard-stats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       setStats(response.data);
       setLoading(false);
     } catch (error) {
@@ -57,7 +60,10 @@ function AdminDashboard() {
   if (loading) {
     return (
       <div className="qb-admin-shell">
-        <div className="loading" style={{ margin: 'auto', fontSize: '1.2rem', fontWeight: 700 }}>
+        <div
+          className="loading"
+          style={{ margin: "auto", fontSize: "1.2rem", fontWeight: 700 }}
+        >
           Synchronizing Portal Data...
         </div>
       </div>
@@ -76,12 +82,18 @@ function AdminDashboard() {
           </div>
         </div>
 
-        <button className="qb-admin-btn-add" onClick={() => navigate("/admin/add-product")}>
+        <button
+          className="qb-admin-btn-add"
+          onClick={() => navigate("/admin/add-product")}
+        >
           + Create Listing
         </button>
 
         <nav className="qb-admin-menu">
-          <button className="active" onClick={() => navigate("/admin/dashboard")}>
+          <button
+            className="active"
+            onClick={() => navigate("/admin/dashboard")}
+          >
             <span>📊</span> Dashboard
           </button>
           <button onClick={() => navigate("/admin/products")}>
@@ -126,15 +138,26 @@ function AdminDashboard() {
               <input type="text" placeholder="Quick search..." />
               <i>🔍</i>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontWeight: 800, fontSize: '0.9rem' }}>Admin User</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)' }}>Super Admin</div>
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
+            >
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontWeight: 800, fontSize: "0.9rem" }}>
+                  Admin User
+                </div>
+                <div
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "var(--admin-text-muted)",
+                  }}
+                >
+                  Super Admin
+                </div>
               </div>
-              <img 
-                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop" 
-                alt="Profile" 
-                style={{ width: 44, height: 44, borderRadius: '12px' }}
+              <img
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=100&auto=format&fit=crop"
+                alt="Profile"
+                style={{ width: 44, height: 44, borderRadius: "12px" }}
               />
             </div>
           </div>
@@ -145,36 +168,56 @@ function AdminDashboard() {
           <div className="qb-admin-stat-card">
             <div className="header">
               <span>TOTAL SALES</span>
-              <div className="icon-box" style={{ background: '#ecfdf5', color: '#10b981' }}>₹</div>
+              <div
+                className="icon-box"
+                style={{ background: "#ecfdf5", color: "#10b981" }}
+              >
+                ₹
+              </div>
             </div>
-            <strong>₹{stats.totalSales?.toLocaleString() || '0'}</strong>
+            <strong>₹{stats.totalSales?.toLocaleString() || "0"}</strong>
             <div className="trend positive">↗ 12.5% vs last week</div>
           </div>
 
           <div className="qb-admin-stat-card">
             <div className="header">
               <span>TOTAL ORDERS</span>
-              <div className="icon-box" style={{ background: '#eff6ff', color: '#3b82f6' }}>📦</div>
+              <div
+                className="icon-box"
+                style={{ background: "#eff6ff", color: "#3b82f6" }}
+              >
+                📦
+              </div>
             </div>
-            <strong>{stats.totalOrders || '0'}</strong>
+            <strong>{stats.totalOrders || "0"}</strong>
             <div className="trend positive">↗ 8.2% vs last week</div>
           </div>
 
           <div className="qb-admin-stat-card">
             <div className="header">
               <span>ACTIVE PRODUCTS</span>
-              <div className="icon-box" style={{ background: '#fef2f2', color: '#ef4444' }}>🛍</div>
+              <div
+                className="icon-box"
+                style={{ background: "#fef2f2", color: "#ef4444" }}
+              >
+                🛍
+              </div>
             </div>
-            <strong>{stats.activeProducts || '0'}</strong>
+            <strong>{stats.activeProducts || "0"}</strong>
             <div className="trend stable">→ No change</div>
           </div>
 
           <div className="qb-admin-stat-card">
             <div className="header">
               <span>CUSTOMERS</span>
-              <div className="icon-box" style={{ background: '#fdf4ff', color: '#a855f7' }}>👥</div>
+              <div
+                className="icon-box"
+                style={{ background: "#fdf4ff", color: "#a855f7" }}
+              >
+                👥
+              </div>
             </div>
-            <strong>{stats.newCustomers || '0'}</strong>
+            <strong>{stats.newCustomers || "0"}</strong>
             <div className="trend positive">↗ 4.1% vs last week</div>
           </div>
         </section>
@@ -184,7 +227,9 @@ function AdminDashboard() {
           <div className="qb-admin-card">
             <div className="qb-admin-card-header">
               <h3>Recent Orders</h3>
-              <button onClick={() => navigate("/admin/orders")}>View All Orders</button>
+              <button onClick={() => navigate("/admin/orders")}>
+                View All Orders
+              </button>
             </div>
             <table className="qb-admin-table">
               <thead>
@@ -197,21 +242,34 @@ function AdminDashboard() {
               </thead>
               <tbody>
                 {stats.recentOrders?.length > 0 ? (
-                  stats.recentOrders.map(order => (
+                  stats.recentOrders.map((order) => (
                     <tr key={order._id}>
-                      <td style={{ fontWeight: 700 }}>#QB-{order._id.slice(-4).toUpperCase()}</td>
-                      <td>{order.user?.name || 'Guest Customer'}</td>
+                      <td style={{ fontWeight: 700 }}>
+                        #QB-{order._id.slice(-4).toUpperCase()}
+                      </td>
+                      <td>{order.user?.name || "Guest Customer"}</td>
                       <td>
-                        <span className={`status-badge ${(order.order_status || 'pending').toLowerCase()}`}>
-                          {order.order_status || 'Pending'}
+                        <span
+                          className={`status-badge ${(order.order_status || "pending").toLowerCase()}`}
+                        >
+                          {order.order_status || "Pending"}
                         </span>
                       </td>
-                      <td style={{ fontWeight: 800 }}>₹{order.total_amount?.toLocaleString()}</td>
+                      <td style={{ fontWeight: 800 }}>
+                        ₹{order.total_amount?.toLocaleString()}
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" style={{ textAlign: 'center', padding: '3rem', color: 'var(--admin-text-muted)' }}>
+                    <td
+                      colSpan="4"
+                      style={{
+                        textAlign: "center",
+                        padding: "3rem",
+                        color: "var(--admin-text-muted)",
+                      }}
+                    >
                       No recent orders to display.
                     </td>
                   </tr>
@@ -233,7 +291,10 @@ function AdminDashboard() {
                     <span>99.9%</span>
                   </div>
                   <div className="metric-bar-bg">
-                    <div className="metric-bar-fill" style={{ width: '99.9%', background: '#10b981' }}></div>
+                    <div
+                      className="metric-bar-fill"
+                      style={{ width: "99.9%", background: "#10b981" }}
+                    ></div>
                   </div>
                 </div>
                 <div className="metric-item">
@@ -242,7 +303,10 @@ function AdminDashboard() {
                     <span>124ms</span>
                   </div>
                   <div className="metric-bar-bg">
-                    <div className="metric-bar-fill" style={{ width: '85%', background: '#3b82f6' }}></div>
+                    <div
+                      className="metric-bar-fill"
+                      style={{ width: "85%", background: "#3b82f6" }}
+                    ></div>
                   </div>
                 </div>
                 <div className="metric-item">
@@ -251,16 +315,19 @@ function AdminDashboard() {
                     <span>42%</span>
                   </div>
                   <div className="metric-bar-bg">
-                    <div className="metric-bar-fill" style={{ width: '42%', background: '#f59e0b' }}></div>
+                    <div
+                      className="metric-bar-fill"
+                      style={{ width: "42%", background: "#f59e0b" }}
+                    ></div>
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="qb-admin-featured-item">
-              <img 
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop" 
-                alt="Promotion" 
+              <img
+                src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=500&auto=format&fit=crop"
+                alt="Promotion"
               />
               <div className="qb-admin-featured-content">
                 <span className="featured-tag">Market Highlight</span>

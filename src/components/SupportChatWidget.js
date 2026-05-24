@@ -5,7 +5,7 @@ import "./SupportChatWidget.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 // ============ MESSAGE COMPONENTS ============
@@ -79,9 +79,7 @@ function OrderCards({ data }) {
         <div key={i} className="agent-order-card">
           <div className="agent-order-header">
             <span className="agent-order-id">#{order.id}</span>
-            <span
-              className={`agent-order-status ${order.status}`}
-            >
+            <span className={`agent-order-status ${order.status}`}>
               {order.status}
             </span>
           </div>
@@ -113,7 +111,9 @@ function ShopCards({ data }) {
           <div className="agent-shop-icon">🏬</div>
           <div className="agent-shop-details">
             <strong>{shop.name}</strong>
-            <span>{shop.address}, {shop.city}</span>
+            <span>
+              {shop.address}, {shop.city}
+            </span>
             <small>📍 {shop.radius}km delivery radius</small>
           </div>
         </div>
@@ -315,12 +315,15 @@ function SupportChatWidget() {
       const { reply: rawReply, toolResult, sources } = response.data;
 
       // Clean any TOOL_CALL leaks from the response
-      const reply = (rawReply || "")
-        .replace(/TOOL_CALL\s*:\s*\{[^}]*(\{[^}]*\}[^}]*)?\}/gi, "")
-        .replace(/^\s*\}\s*/gm, "")
-        .replace(/```json[\s\S]*?```/gi, "")
-        .replace(/```[\s\S]*?```/gi, "")
-        .trim() || (toolResult?.message || "Here are the results:");
+      const reply =
+        (rawReply || "")
+          .replace(/TOOL_CALL\s*:\s*\{[^}]*(\{[^}]*\}[^}]*)?\}/gi, "")
+          .replace(/^\s*\}\s*/gm, "")
+          .replace(/```json[\s\S]*?```/gi, "")
+          .replace(/```[\s\S]*?```/gi, "")
+          .trim() ||
+        toolResult?.message ||
+        "Here are the results:";
 
       setMessages((prev) => [
         ...prev,
@@ -394,10 +397,9 @@ function SupportChatWidget() {
           },
         ]);
       } catch (err) {
-        const fallbackMsg =
-          err.response?.data?.fallback
-            ? err.response.data.message
-            : "Image search encountered an issue. Try describing the product in text instead! 📝";
+        const fallbackMsg = err.response?.data?.fallback
+          ? err.response.data.message
+          : "Image search encountered an issue. Try describing the product in text instead! 📝";
 
         setMessages((prev) => [
           ...prev,
@@ -484,7 +486,9 @@ function SupportChatWidget() {
                       __html: formatMessage(item.content),
                     }}
                   />
-                  {item.toolResult && <RichContent toolResult={item.toolResult} />}
+                  {item.toolResult && (
+                    <RichContent toolResult={item.toolResult} />
+                  )}
                   {item.sources && item.sources.length > 0 && (
                     <div className="agent-msg-sources">
                       {item.sources.slice(0, 3).map((s, i) => (
@@ -606,7 +610,7 @@ function SupportChatWidget() {
 
 function formatMessage(text) {
   if (!text) return "";
-  
+
   // Clean up any remaining TOOL_CALL or JSON blocks that might have leaked
   let cleaned = text
     .replace(/TOOL_CALL\s*:\s*\{[^}]*(\{[^}]*\}[^}]*)?\}/gi, "")

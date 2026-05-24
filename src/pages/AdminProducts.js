@@ -6,7 +6,7 @@ import "./AdminShared.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function AdminProducts() {
@@ -45,12 +45,9 @@ function AdminProducts() {
   const fetchProducts = async () => {
     const token = localStorage.getItem("adminToken");
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/admin/products`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/admin/products`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setProducts(response.data);
       setLoading(false);
     } catch (error) {
@@ -93,7 +90,7 @@ function AdminProducts() {
         updateData,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       setProducts(
@@ -105,8 +102,8 @@ function AdminProducts() {
                 price: parseFloat(editForm.price),
                 stock: parseInt(editForm.stock),
               }
-            : p
-        )
+            : p,
+        ),
       );
 
       setEditingProduct(null);
@@ -122,12 +119,9 @@ function AdminProducts() {
 
     const token = localStorage.getItem("adminToken");
     try {
-      await axios.delete(
-        `${API_BASE_URL}/api/admin/products/${productId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      await axios.delete(`${API_BASE_URL}/api/admin/products/${productId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setProducts(products.filter((p) => p._id !== productId));
     } catch (error) {
       alert("Failed to delete product");
@@ -145,9 +139,10 @@ function AdminProducts() {
     let output = [...products];
 
     if (normalized) {
-      output = output.filter((product) =>
-        product.name?.toLowerCase().includes(normalized) ||
-        product.category?.toLowerCase().includes(normalized)
+      output = output.filter(
+        (product) =>
+          product.name?.toLowerCase().includes(normalized) ||
+          product.category?.toLowerCase().includes(normalized),
       );
     }
 
@@ -158,8 +153,10 @@ function AdminProducts() {
     }
 
     output.sort((a, b) => {
-      if (sortBy === "price") return Number(a.price || 0) - Number(b.price || 0);
-      if (sortBy === "stock") return Number(a.stock || 0) - Number(b.stock || 0);
+      if (sortBy === "price")
+        return Number(a.price || 0) - Number(b.price || 0);
+      if (sortBy === "stock")
+        return Number(a.stock || 0) - Number(b.stock || 0);
       return (a.name || "").localeCompare(b.name || "");
     });
 
@@ -176,13 +173,20 @@ function AdminProducts() {
   const endIndex = Math.min(startIndex + pageSize, filteredProducts.length);
   const currentItems = filteredProducts.slice(startIndex, endIndex);
 
-  const activeStock = products.reduce((sum, p) => sum + Number(p.stock || 0), 0);
-  const lowStockCount = products.filter((p) => Number(p.stock || 0) <= 5).length;
+  const activeStock = products.reduce(
+    (sum, p) => sum + Number(p.stock || 0),
+    0,
+  );
+  const lowStockCount = products.filter(
+    (p) => Number(p.stock || 0) <= 5,
+  ).length;
 
   if (loading) {
     return (
       <div className="qb-admin-shell">
-        <div className="loading" style={{ margin: 'auto' }}>Fetching Inventory...</div>
+        <div className="loading" style={{ margin: "auto" }}>
+          Fetching Inventory...
+        </div>
       </div>
     );
   }
@@ -198,16 +202,32 @@ function AdminProducts() {
             <p>Admin Portal</p>
           </div>
         </div>
-        <button className="qb-admin-btn-add" onClick={() => navigate("/admin/add-product")}>
+        <button
+          className="qb-admin-btn-add"
+          onClick={() => navigate("/admin/add-product")}
+        >
           + Create Listing
         </button>
         <nav className="qb-admin-menu">
-          <button onClick={() => navigate("/admin/dashboard")}>📊 Dashboard</button>
-          <button className="active" onClick={() => navigate("/admin/products")}>📦 Inventory</button>
+          <button onClick={() => navigate("/admin/dashboard")}>
+            📊 Dashboard
+          </button>
+          <button
+            className="active"
+            onClick={() => navigate("/admin/products")}
+          >
+            📦 Inventory
+          </button>
           <button onClick={() => navigate("/admin/orders")}>🧾 Orders</button>
-          <button onClick={() => navigate("/admin/support")}>🤖 AI Agent</button>
-          <button onClick={() => navigate("/admin/categories")}>📁 Categories</button>
-          <button onClick={() => navigate("/admin/settings")}>⚙️ Settings</button>
+          <button onClick={() => navigate("/admin/support")}>
+            🤖 AI Agent
+          </button>
+          <button onClick={() => navigate("/admin/categories")}>
+            📁 Categories
+          </button>
+          <button onClick={() => navigate("/admin/settings")}>
+            ⚙️ Settings
+          </button>
         </nav>
         <div className="qb-admin-sidebar-bottom">
           <button onClick={() => navigate("/")}>🏠 View Store</button>
@@ -222,7 +242,9 @@ function AdminProducts() {
             <h1>Products Inventory</h1>
             <p>Manage your artisanal marketplace offerings and stock levels.</p>
           </div>
-          <button onClick={() => navigate("/admin/add-product")}>+ Add New Product</button>
+          <button onClick={() => navigate("/admin/add-product")}>
+            + Add New Product
+          </button>
         </header>
 
         <div className="qb-admin-toolbar-row">
@@ -234,8 +256,15 @@ function AdminProducts() {
             />
           </div>
           <div className="qb-admin-toolbar-actions">
-            <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-              {categories.map(c => <option key={c} value={c}>{c === 'all' ? 'All Categories' : c}</option>)}
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+            >
+              {categories.map((c) => (
+                <option key={c} value={c}>
+                  {c === "all" ? "All Categories" : c}
+                </option>
+              ))}
             </select>
             <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
               <option value="name">Sort by Name</option>
@@ -261,7 +290,14 @@ function AdminProducts() {
                 <tr key={product._id}>
                   <td>
                     <div className="qb-product-cell">
-                      <img src={product.imageUrl || product.image || getPlaceholderImage(product.name)} alt={product.name} />
+                      <img
+                        src={
+                          product.imageUrl ||
+                          product.image ||
+                          getPlaceholderImage(product.name)
+                        }
+                        alt={product.name}
+                      />
                       <div>
                         <strong>{product.name}</strong>
                         <small>ID: {product._id.slice(-6).toUpperCase()}</small>
@@ -269,20 +305,29 @@ function AdminProducts() {
                     </div>
                   </td>
                   <td>
-                    <span className="qb-category-pill">{product.category || "Uncategorized"}</span>
+                    <span className="qb-category-pill">
+                      {product.category || "Uncategorized"}
+                    </span>
                   </td>
                   <td>
                     <strong>₹{Number(product.price || 0).toFixed(2)}</strong>
                   </td>
                   <td>
-                    <span className={`qb-stock-state ${Number(product.stock || 0) <= 5 ? "low" : "ok"}`}>
+                    <span
+                      className={`qb-stock-state ${Number(product.stock || 0) <= 5 ? "low" : "ok"}`}
+                    >
                       {product.stock || 0} in stock
                     </span>
                   </td>
                   <td>
                     <div className="qb-row-actions">
                       <button onClick={() => handleEdit(product)}>Edit</button>
-                      <button onClick={() => handleDelete(product._id, product.name)} style={{ color: '#ef4444' }}>Delete</button>
+                      <button
+                        onClick={() => handleDelete(product._id, product.name)}
+                        style={{ color: "#ef4444" }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -299,7 +344,9 @@ function AdminProducts() {
           </article>
           <article>
             <h4>Low Stock Alerts</h4>
-            <strong style={{ color: lowStockCount > 0 ? '#ef4444' : 'inherit' }}>
+            <strong
+              style={{ color: lowStockCount > 0 ? "#ef4444" : "inherit" }}
+            >
               {lowStockCount.toString().padStart(2, "0")}
             </strong>
             <p>Requires attention</p>

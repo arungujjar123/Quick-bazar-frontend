@@ -6,7 +6,7 @@ import "./AuthRedesign.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function Register() {
@@ -46,15 +46,12 @@ function Register() {
     }
 
     try {
-      await axios.post(
-        `${API_BASE_URL}/api/auth/register`,
-        {
-          name,
-          email,
-          phone,
-          password,
-        },
-      );
+      await axios.post(`${API_BASE_URL}/api/auth/register`, {
+        name,
+        email,
+        phone,
+        password,
+      });
 
       setSuccess("Account created successfully! Redirecting to login...");
       setTimeout(() => {
@@ -74,25 +71,27 @@ function Register() {
     <div className="qb-auth-page fade-in">
       {/* Left Hero Side */}
       <div className="qb-auth-hero">
-        <img 
-          src="https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?q=80&w=2070&auto=format&fit=crop" 
+        <img
+          src="https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?q=80&w=2070&auto=format&fit=crop"
           className="qb-auth-hero-img"
-          alt="Fresh Groceries" 
+          alt="Fresh Groceries"
         />
         <div className="qb-auth-hero-card">
           <div className="icon-box">🥗</div>
           <h1>Join QuickBazaar</h1>
           <p>
-            Start your journey with local artisans today. 
-            Get fresh, hand-crafted essentials delivered to your door.
+            Start your journey with local artisans today. Get fresh,
+            hand-crafted essentials delivered to your door.
           </p>
         </div>
       </div>
 
       {/* Right Form Side */}
-      <div className="qb-auth-form-side" style={{ overflowY: 'auto' }}>
+      <div className="qb-auth-form-side" style={{ overflowY: "auto" }}>
         <div className="qb-auth-form-shell">
-          <Link to="/" className="qb-auth-back-link">← Back to Home</Link>
+          <Link to="/" className="qb-auth-back-link">
+            ← Back to Home
+          </Link>
           <h2>Create Account</h2>
           <p>Join our community of artisanal quality.</p>
 
@@ -194,11 +193,29 @@ function Register() {
                 onChange={(e) => setAcceptedTerms(e.target.checked)}
               />
               <span htmlFor="agree-terms">
-                I agree to the <a href="#0" style={{ color: 'var(--qb-purple)', textDecoration: 'none' }}>Terms of Service</a> and <a href="#0" style={{ color: 'var(--qb-purple)', textDecoration: 'none' }}>Privacy Policy</a>.
+                I agree to the{" "}
+                <a
+                  href="#0"
+                  style={{ color: "var(--qb-purple)", textDecoration: "none" }}
+                >
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a
+                  href="#0"
+                  style={{ color: "var(--qb-purple)", textDecoration: "none" }}
+                >
+                  Privacy Policy
+                </a>
+                .
               </span>
             </div>
 
-            <button type="submit" className="qb-auth-submit-btn" disabled={loading}>
+            <button
+              type="submit"
+              className="qb-auth-submit-btn"
+              disabled={loading}
+            >
               {loading ? "Creating account..." : "Create Account →"}
             </button>
           </form>

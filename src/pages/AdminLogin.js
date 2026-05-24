@@ -6,7 +6,7 @@ import "./AdminAuthRedesign.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function AdminLogin() {
@@ -44,16 +44,16 @@ function AdminLogin() {
     <div className="qb-admin-auth-page fade-in">
       {/* Left Hero Side */}
       <div className="qb-admin-auth-hero">
-        <img 
-          src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop" 
-          alt="Grocery Background" 
+        <img
+          src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1974&auto=format&fit=crop"
+          alt="Grocery Background"
         />
         <div className="qb-admin-auth-hero-card">
           <div className="icon">🛒</div>
           <h1>QuickBazaar</h1>
           <p>
-            Elevating local commerce with global standards. 
-            Curated, clean, and connected.
+            Elevating local commerce with global standards. Curated, clean, and
+            connected.
           </p>
         </div>
       </div>
@@ -83,7 +83,9 @@ function AdminLogin() {
                 <input
                   type="email"
                   value={credentials.email}
-                  onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, email: e.target.value })
+                  }
                   placeholder="hello@example.com"
                   required
                   disabled={loading}
@@ -92,16 +94,34 @@ function AdminLogin() {
             </div>
 
             <div className="qb-admin-auth-group">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <label>Password</label>
-                <a href="#0" style={{ fontSize: '0.8rem', color: '#4f46e5', textDecoration: 'none', fontWeight: 700 }}>Forgot?</a>
+                <a
+                  href="#0"
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "#4f46e5",
+                    textDecoration: "none",
+                    fontWeight: 700,
+                  }}
+                >
+                  Forgot?
+                </a>
               </div>
               <div className="qb-admin-auth-input-wrapper">
                 <span>🔒</span>
                 <input
                   type="password"
                   value={credentials.password}
-                  onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                  onChange={(e) =>
+                    setCredentials({ ...credentials, password: e.target.value })
+                  }
                   placeholder="••••••••"
                   required
                   disabled={loading}
@@ -109,13 +129,18 @@ function AdminLogin() {
               </div>
             </div>
 
-            <button type="submit" className="qb-admin-auth-submit-btn" disabled={loading}>
+            <button
+              type="submit"
+              className="qb-admin-auth-submit-btn"
+              disabled={loading}
+            >
               {loading ? "Signing In..." : "Sign In →"}
             </button>
           </form>
 
           <div className="qb-admin-auth-switch-link">
-            Don't have an account? <Link to="/admin/register">Create an account</Link>
+            Don't have an account?{" "}
+            <Link to="/admin/register">Create an account</Link>
           </div>
         </div>
       </div>

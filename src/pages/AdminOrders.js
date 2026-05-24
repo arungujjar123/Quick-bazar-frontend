@@ -6,7 +6,7 @@ import "./AdminShared.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://vercel-backend-zeta-green.vercel.app"
+    ? "https://quick-bazar-backend.vercel.app"
     : "http://localhost:5000");
 
 function AdminOrders() {
@@ -33,12 +33,9 @@ function AdminOrders() {
   const fetchOrders = async () => {
     const token = localStorage.getItem("adminToken");
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/admin/orders`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const response = await axios.get(`${API_BASE_URL}/api/admin/orders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setOrders(response.data);
       if (response.data.length > 0) {
         setSelectedOrderId(response.data[0]._id);
@@ -114,18 +111,26 @@ function AdminOrders() {
 
     return orders.filter((order) => {
       const idText = `QB-${order._id.slice(-4).toUpperCase()}`.toLowerCase();
-      const customer = (order.user?.name || order.user?.email || "").toLowerCase();
+      const customer = (
+        order.user?.name ||
+        order.user?.email ||
+        ""
+      ).toLowerCase();
       return idText.includes(query) || customer.includes(query);
     });
   }, [orders, searchTerm]);
 
   const selectedOrder =
-    orders.find((order) => order._id === selectedOrderId) || filteredOrders[0] || null;
+    orders.find((order) => order._id === selectedOrderId) ||
+    filteredOrders[0] ||
+    null;
 
   if (loading) {
     return (
       <div className="qb-admin-shell">
-        <div className="loading" style={{ margin: 'auto' }}>Loading Order Stream...</div>
+        <div className="loading" style={{ margin: "auto" }}>
+          Loading Order Stream...
+        </div>
       </div>
     );
   }
@@ -141,17 +146,34 @@ function AdminOrders() {
             <p>Admin Portal</p>
           </div>
         </div>
-        <button className="qb-admin-btn-add" onClick={() => navigate("/admin/add-product")}>
+        <button
+          className="qb-admin-btn-add"
+          onClick={() => navigate("/admin/add-product")}
+        >
           + Create Listing
         </button>
         <nav className="qb-admin-menu">
-          <button onClick={() => navigate("/admin/dashboard")}>📊 Dashboard</button>
-          <button onClick={() => navigate("/admin/products")}>📦 Inventory</button>
-          <button className="active" onClick={() => navigate("/admin/orders")}>🧾 Orders</button>
-          <button onClick={() => navigate("/admin/support")}>🤖 AI Agent</button>
-          <button onClick={() => navigate("/admin/customers")}>👥 Customers</button>
-          <button onClick={() => navigate("/admin/categories")}>📁 Categories</button>
-          <button onClick={() => navigate("/admin/settings")}>⚙️ Settings</button>
+          <button onClick={() => navigate("/admin/dashboard")}>
+            📊 Dashboard
+          </button>
+          <button onClick={() => navigate("/admin/products")}>
+            📦 Inventory
+          </button>
+          <button className="active" onClick={() => navigate("/admin/orders")}>
+            🧾 Orders
+          </button>
+          <button onClick={() => navigate("/admin/support")}>
+            🤖 AI Agent
+          </button>
+          <button onClick={() => navigate("/admin/customers")}>
+            👥 Customers
+          </button>
+          <button onClick={() => navigate("/admin/categories")}>
+            📁 Categories
+          </button>
+          <button onClick={() => navigate("/admin/settings")}>
+            ⚙️ Settings
+          </button>
         </nav>
         <div className="qb-admin-sidebar-bottom">
           <button onClick={() => navigate("/")}>🏠 View Store</button>
@@ -185,8 +207,11 @@ function AdminOrders() {
             <div className="qb-order-cards-list">
               {filteredOrders.map((order) => {
                 const status = (order.order_status || "pending").toLowerCase();
-                const amount = Number(order.total_amount || order.total || 0).toFixed(2);
-                const customer = order.user?.name || order.user?.email || "Unknown";
+                const amount = Number(
+                  order.total_amount || order.total || 0,
+                ).toFixed(2);
+                const customer =
+                  order.user?.name || order.user?.email || "Unknown";
                 const orderCode = `QB-${order._id.slice(-4).toUpperCase()}`;
 
                 return (
@@ -197,8 +222,12 @@ function AdminOrders() {
                   >
                     <div className="avatar">{getInitials(customer)}</div>
                     <div className="content">
-                      <h4>{orderCode} - {customer}</h4>
-                      <p>₹{amount} · {formatElapsed(order.createdAt)}</p>
+                      <h4>
+                        {orderCode} - {customer}
+                      </h4>
+                      <p>
+                        ₹{amount} · {formatElapsed(order.createdAt)}
+                      </p>
                       <span className={`status-badge ${status}`}>{status}</span>
                     </div>
                   </article>
@@ -209,7 +238,10 @@ function AdminOrders() {
 
           <aside className="qb-order-detail-pane">
             {!selectedOrder ? (
-              <div className="empty-state" style={{ textAlign: 'center', marginTop: '4rem' }}>
+              <div
+                className="empty-state"
+                style={{ textAlign: "center", marginTop: "4rem" }}
+              >
                 <p>Select an order to view full details.</p>
               </div>
             ) : (
@@ -217,7 +249,9 @@ function AdminOrders() {
                 <div className="qb-order-detail-header">
                   <small>ORDER LOG</small>
                   <h3>Order #QB-{selectedOrder._id.slice(-4).toUpperCase()}</h3>
-                  <span className={`status-badge ${selectedOrder.order_status?.toLowerCase()}`}>
+                  <span
+                    className={`status-badge ${selectedOrder.order_status?.toLowerCase()}`}
+                  >
                     {selectedOrder.order_status || "Pending"}
                   </span>
                 </div>
@@ -228,47 +262,79 @@ function AdminOrders() {
                     {selectedOrder.items
                       .filter((item) => item.product)
                       .map((item, index) => (
-                        <div key={item.product?._id || index} className="item-row">
-                          <img src={item.product?.imageUrl || item.product?.image} alt="Product" />
+                        <div
+                          key={item.product?._id || index}
+                          className="item-row"
+                        >
+                          <img
+                            src={item.product?.imageUrl || item.product?.image}
+                            alt="Product"
+                          />
                           <div style={{ flex: 1 }}>
                             <strong>{item.product?.name || "Product"}</strong>
                             <p>Qty: {item.quantity}</p>
                           </div>
-                          <strong>₹{Number((item.product?.price || 0) * item.quantity).toFixed(2)}</strong>
+                          <strong>
+                            ₹
+                            {Number(
+                              (item.product?.price || 0) * item.quantity,
+                            ).toFixed(2)}
+                          </strong>
                         </div>
                       ))}
                   </div>
 
                   <div className="total-row">
                     <strong>Total Amount</strong>
-                    <strong style={{ color: 'var(--admin-primary)' }}>
-                      ₹{Number(selectedOrder.total_amount || selectedOrder.total || 0).toFixed(2)}
+                    <strong style={{ color: "var(--admin-primary)" }}>
+                      ₹
+                      {Number(
+                        selectedOrder.total_amount || selectedOrder.total || 0,
+                      ).toFixed(2)}
                     </strong>
                   </div>
 
                   <h4>Actions</h4>
-                  <div style={{ display: 'flex', gap: '1rem' }}>
+                  <div style={{ display: "flex", gap: "1rem" }}>
                     <button
                       className="qb-admin-btn-add"
                       style={{ flex: 1 }}
                       disabled={updatingOrder === selectedOrder._id}
-                      onClick={() => updateOrderStatus(selectedOrder._id, "shipped")}
+                      onClick={() =>
+                        updateOrderStatus(selectedOrder._id, "shipped")
+                      }
                     >
                       Mark as Shipped
                     </button>
                     <button
                       className="qb-admin-btn-add"
-                      style={{ flex: 1, background: '#ef4444' }}
+                      style={{ flex: 1, background: "#ef4444" }}
                       disabled={updatingOrder === selectedOrder._id}
-                      onClick={() => updateOrderStatus(selectedOrder._id, "cancelled")}
+                      onClick={() =>
+                        updateOrderStatus(selectedOrder._id, "cancelled")
+                      }
                     >
                       Cancel
                     </button>
                   </div>
 
-                  <div className="internal-note" style={{ marginTop: '2rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '16px' }}>
+                  <div
+                    className="internal-note"
+                    style={{
+                      marginTop: "2rem",
+                      background: "#f8fafc",
+                      padding: "1.5rem",
+                      borderRadius: "16px",
+                    }}
+                  >
                     <strong>Merchant Note</strong>
-                    <p style={{ margin: '0.5rem 0 0', color: 'var(--admin-text-muted)', fontSize: '0.9rem' }}>
+                    <p
+                      style={{
+                        margin: "0.5rem 0 0",
+                        color: "var(--admin-text-muted)",
+                        fontSize: "0.9rem",
+                      }}
+                    >
                       Verified address. Standard packaging requested.
                     </p>
                   </div>
