@@ -78,8 +78,8 @@ function AdminAddProduct() {
     }
 
     // Validation
-    if (!product.name || !product.price || !product.description) {
-      alert("Please fill in all required fields");
+    if (!product.name.trim() || !product.price || !product.description.trim()) {
+      alert("Please fill in all required fields properly");
       setLoading(false);
       return;
     }

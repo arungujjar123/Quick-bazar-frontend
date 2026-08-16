@@ -7,8 +7,11 @@ function Cart() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
   const navigate = useNavigate();
 
-  const subtotal = cartItems.reduce(
-    (acc, item) => acc + (item.product?.price || 0) * item.quantity,
+  // Filter out items where the product was deleted from the database
+  const validCartItems = cartItems.filter((item) => item.product);
+
+  const subtotal = validCartItems.reduce(
+    (acc, item) => acc + (item.product?.price || 0) * (item.quantity || 0),
     0,
   );
   const shipping = subtotal > 0 ? 50 : 0;
@@ -19,7 +22,7 @@ function Cart() {
     navigate("/checkout");
   };
 
-  if (cartItems.length === 0) {
+  if (validCartItems.length === 0) {
     return (
       <div className="qb-cart-page fade-in">
         <div className="container" style={{ textAlign: 'center', padding: '5rem 0' }}>
@@ -47,11 +50,11 @@ function Cart() {
           <section className="qb-cart-items-section">
             <div className="qb-cart-header">
               <h2>My Items</h2>
-              <span>{cartItems.length} Products</span>
+              <span>{validCartItems.length} Products</span>
             </div>
 
             <div className="qb-cart-list">
-              {cartItems.map((item) => (
+              {validCartItems.map((item) => (
                 <div key={item.product._id} className="qb-cart-item">
                   <img 
                     src={item.product.imageUrl || item.product.image} 

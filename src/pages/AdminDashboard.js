@@ -15,11 +15,24 @@ function AdminDashboard() {
     totalOrders: 0,
     activeProducts: 0,
     newCustomers: 0,
+    totalCommissions: 0, // For SuperAdmin
+    activeShops: 0, // For SuperAdmin
     recentOrders: [],
     lowStockItems: [],
   });
   const [loading, setLoading] = useState(true);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const adminInfoStr = localStorage.getItem("adminInfo");
+    if (adminInfoStr) {
+      try {
+        const info = JSON.parse(adminInfoStr);
+        setIsSuperAdmin(info.role === "super_admin");
+      } catch (e) {}
+    }
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
@@ -32,14 +45,28 @@ function AdminDashboard() {
 
   const fetchDashboardStats = async () => {
     const token = localStorage.getItem("adminToken");
+    const adminInfo = JSON.parse(localStorage.getItem("adminInfo") || "{}");
+    const superAdmin = adminInfo.role === "super_admin";
+    
     try {
-      const response = await axios.get(
-        `${API_BASE_URL}/api/admin/dashboard-stats`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
-      setStats(response.data);
+      const endpoint = superAdmin
+        ? `${API_BASE_URL}/api/superadmin/dashboard-stats`
+        : `${API_BASE_URL}/api/admin/dashboard-stats`;
+
+      const response = await axios.get(endpoint, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      
+      const data = response.data.stats;
+      setStats({
+        totalSales: superAdmin ? data.totalPlatformRevenue : data.totalRevenue,
+        totalOrders: data.totalOrders,
+        activeProducts: superAdmin ? 0 : data.totalProducts,
+        newCustomers: data.totalUsers,
+        totalCommissions: superAdmin ? data.totalCommissions : 0,
+        activeShops: superAdmin ? data.totalShops : 0,
+        recentOrders: response.data.recentOrders,
+      });
       setLoading(false);
     } catch (error) {
       console.error("Error fetching stats:", error);
@@ -96,18 +123,33 @@ function AdminDashboard() {
           >
             <span>📊</span> Dashboard
           </button>
-          <button onClick={() => navigate("/admin/products")}>
-            <span>📦</span> Inventory
-          </button>
-          <button onClick={() => navigate("/admin/orders")}>
-            <span>🧾</span> Orders
-          </button>
+          
+          {isSuperAdmin ? (
+            <button onClick={() => navigate("/admin/shop-owners")}>
+              <span>🏪</span> Platform Owners
+            </button>
+          ) : (
+            <>
+              <button onClick={() => navigate("/admin/products")}>
+                <span>📦</span> Inventory
+              </button>
+              <button onClick={() => navigate("/admin/orders")}>
+                <span>🧾</span> Orders
+              </button>
+              <button onClick={() => navigate("/admin/shops")}>
+                <span>🏪</span> Shops
+              </button>
+            </>
+          )}
+          
           <button onClick={() => navigate("/admin/support")}>
             <span>🤖</span> AI Agent
           </button>
-          <button onClick={() => navigate("/admin/customers")}>
-            <span>👥</span> Customers
-          </button>
+          {!isSuperAdmin && (
+            <button onClick={() => navigate("/admin/customers")}>
+              <span>👥</span> Customers
+            </button>
+          )}
           <button onClick={() => navigate("/admin/categories")}>
             <span>📁</span> Categories
           </button>
@@ -143,7 +185,7 @@ function AdminDashboard() {
             >
               <div style={{ textAlign: "right" }}>
                 <div style={{ fontWeight: 800, fontSize: "0.9rem" }}>
-                  Admin User
+                  {isSuperAdmin ? "Platform Owner" : "Admin User"}
                 </div>
                 <div
                   style={{
@@ -151,7 +193,7 @@ function AdminDashboard() {
                     color: "var(--admin-text-muted)",
                   }}
                 >
-                  Super Admin
+                  {isSuperAdmin ? "Super Admin" : "Shop Admin"}
                 </div>
               </div>
               <img
@@ -195,29 +237,29 @@ function AdminDashboard() {
 
           <div className="qb-admin-stat-card">
             <div className="header">
-              <span>ACTIVE PRODUCTS</span>
+              <span>{isSuperAdmin ? "ACTIVE SHOPS" : "ACTIVE PRODUCTS"}</span>
               <div
                 className="icon-box"
                 style={{ background: "#fef2f2", color: "#ef4444" }}
               >
-                🛍
+                {isSuperAdmin ? "🏪" : "🛍"}
               </div>
             </div>
-            <strong>{stats.activeProducts || "0"}</strong>
+            <strong>{isSuperAdmin ? (stats.activeShops || "0") : (stats.activeProducts || "0")}</strong>
             <div className="trend stable">→ No change</div>
           </div>
 
           <div className="qb-admin-stat-card">
             <div className="header">
-              <span>CUSTOMERS</span>
+              <span>{isSuperAdmin ? "COMMISSIONS EARNED" : "CUSTOMERS"}</span>
               <div
                 className="icon-box"
                 style={{ background: "#fdf4ff", color: "#a855f7" }}
               >
-                👥
+                {isSuperAdmin ? "💰" : "👥"}
               </div>
             </div>
-            <strong>{stats.newCustomers || "0"}</strong>
+            <strong>{isSuperAdmin ? `₹${stats.totalCommissions?.toLocaleString() || "0"}` : (stats.newCustomers || "0")}</strong>
             <div className="trend positive">↗ 4.1% vs last week</div>
           </div>
         </section>

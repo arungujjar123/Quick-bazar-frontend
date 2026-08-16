@@ -148,7 +148,7 @@ function ProductCarousel({ products }) {
                     {currentProduct.category}
                   </div>
                 )}
-                <div className="carousel-price">${currentProduct.price}</div>
+                <div className="carousel-price">₹{currentProduct.price}</div>
               </div>
             </Link>
           </div>

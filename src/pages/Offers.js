@@ -16,19 +16,28 @@ function Offers() {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/products`);
-        setProducts(response.data || []);
-      } catch (error) {
-        console.error("Offers data load error:", error);
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const lat = localStorage.getItem("qb_lat");
+      const lng = localStorage.getItem("qb_lng");
+      let url = `${API_BASE_URL}/api/products`;
+      if (lat && lng) {
+        url = `${API_BASE_URL}/api/products/nearby?lat=${lat}&lng=${lng}&radiusKm=50`;
       }
-    };
+      const response = await axios.get(url);
+      setProducts(response.data || []);
+    } catch (error) {
+      console.error("Offers data load error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
+    window.addEventListener('locationChanged', fetchData);
+    return () => window.removeEventListener('locationChanged', fetchData);
   }, []);
 
   const handleAddToCart = async (e, productId, productName) => {

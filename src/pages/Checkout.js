@@ -38,10 +38,12 @@ function Checkout() {
     const token = localStorage.getItem("token");
 
     const orderData = {
-      items: cartItems.map((item) => ({
-        product: item.product._id,
-        quantity: item.quantity,
-      })),
+      items: cartItems
+        .filter((item) => item.product)
+        .map((item) => ({
+          product: item.product._id,
+          quantity: item.quantity,
+        })),
       total_amount: total,
       shipping_address: `${address.street}, ${address.city}, ${address.state} - ${address.zipCode}`,
       payment_method: paymentMethod,
@@ -254,7 +256,7 @@ function Checkout() {
                 Order Preview
               </h3>
               <div className="qb-preview-list">
-                {cartItems.map((item) => (
+                {cartItems.filter((item) => item.product).map((item) => (
                   <div key={item.product._id} className="qb-preview-item">
                     <img
                       src={item.product.imageUrl || item.product.image}

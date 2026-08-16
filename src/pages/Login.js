@@ -21,6 +21,12 @@ function Login() {
     setLoading(true);
     setError("");
 
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter your email and password");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
         email,
@@ -28,7 +34,11 @@ function Login() {
       });
 
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
+      // Fetch user profile after login since the login endpoint only returns the token
+      const profileRes = await axios.get(`${API_BASE_URL}/api/auth/profile`, {
+        headers: { Authorization: `Bearer ${response.data.token}` },
+      });
+      localStorage.setItem("user", JSON.stringify(profileRes.data));
       navigate("/");
     } catch (err) {
       console.error("Login error:", err);
@@ -73,7 +83,10 @@ function Login() {
               Customer
             </button>
             <button type="button" onClick={() => navigate("/admin/login")}>
-              Merchant / Admin
+              Merchant
+            </button>
+            <button type="button" onClick={() => navigate("/admin/login?role=superadmin")}>
+              Super Admin
             </button>
           </div>
 

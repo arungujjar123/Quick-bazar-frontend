@@ -13,7 +13,18 @@ function AdminCategories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newCategory, setNewCategory] = useState("");
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const adminInfoStr = localStorage.getItem("adminInfo");
+    if (adminInfoStr) {
+      try {
+        const info = JSON.parse(adminInfoStr);
+        setIsSuperAdmin(info.role === "super_admin");
+      } catch (e) {}
+    }
+  }, []);
 
   useEffect(() => {
     fetchCategories();
@@ -89,23 +100,43 @@ function AdminCategories() {
         </div>
         <nav className="qb-admin-menu">
           <button onClick={() => navigate("/admin/dashboard")}>
-            📊 Dashboard
+            <span>📊</span> Dashboard
           </button>
-          <button onClick={() => navigate("/admin/products")}>
-            📦 Inventory
-          </button>
-          <button onClick={() => navigate("/admin/orders")}>🧾 Orders</button>
+          
+          {isSuperAdmin ? (
+            <button onClick={() => navigate("/admin/shop-owners")}>
+              <span>🏪</span> Platform Owners
+            </button>
+          ) : (
+            <>
+              <button onClick={() => navigate("/admin/products")}>
+                <span>📦</span> Inventory
+              </button>
+              <button onClick={() => navigate("/admin/orders")}>
+                <span>🧾</span> Orders
+              </button>
+              <button onClick={() => navigate("/admin/shops")}>
+                <span>🏪</span> Shops
+              </button>
+            </>
+          )}
+          
           <button onClick={() => navigate("/admin/support")}>
-            🤖 AI Agent
+            <span>🤖</span> AI Agent
           </button>
+          {!isSuperAdmin && (
+            <button onClick={() => navigate("/admin/customers")}>
+              <span>👥</span> Customers
+            </button>
+          )}
           <button
             className="active"
             onClick={() => navigate("/admin/categories")}
           >
-            📁 Categories
+            <span>📁</span> Categories
           </button>
           <button onClick={() => navigate("/admin/settings")}>
-            ⚙️ Settings
+            <span>⚙️</span> Settings
           </button>
         </nav>
         <div className="qb-admin-sidebar-bottom">

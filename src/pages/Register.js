@@ -27,6 +27,12 @@ function Register() {
     setError("");
     setSuccess("");
 
+    if (!name.trim() || !email.trim()) {
+      setError("Please fill out all required fields properly");
+      setLoading(false);
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       setLoading(false);
@@ -47,9 +53,9 @@ function Register() {
 
     try {
       await axios.post(`${API_BASE_URL}/api/auth/register`, {
-        name,
-        email,
-        phone,
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
         password,
       });
 
@@ -100,7 +106,10 @@ function Register() {
               Customer
             </button>
             <button type="button" onClick={() => navigate("/admin/register")}>
-              Merchant / Admin
+              Merchant
+            </button>
+            <button type="button" onClick={() => navigate("/admin/register?role=superadmin")}>
+              Super Admin
             </button>
           </div>
 

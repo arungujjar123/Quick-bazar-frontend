@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import ShopMap from "../components/ShopMap";
 import "../HomeRedesign.css";
 
 const API_BASE_URL =
@@ -12,19 +13,13 @@ const API_BASE_URL =
 
 // Mock images based on generated assets
 const MOCK_IMAGES = {
-  hero_bg:
-    "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\grocery_shelf_blur_mockup_1777765179299.png",
-  avocados:
-    "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\hass_avocados_mockup_1777765009069.png",
-  sourdough:
-    "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\sourdough_loaf_mockup_1777765029247.png",
-  paneer:
-    "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\fresh_paneer_mockup_1777765049660.png",
-  fruit_basket:
-    "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\fruit_basket_mockup_1777765077703.png",
-  baker:
-    "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\artisan_baker_mockup_1777765104025.png",
-  farm: "C:\\Users\\hp pc\\.gemini\\antigravity\\brain\\76b1c5d2-7aa4-46db-89ef-4133c644ee0b\\hydroponic_farm_mockup_1777765150053.png",
+  hero_bg: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1200&q=80",
+  avocados: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=600&q=80",
+  sourdough: "https://images.unsplash.com/photo-1585478259715-876a6a81fa08?auto=format&fit=crop&w=600&q=80",
+  paneer: "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=600&q=80",
+  fruit_basket: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=600&q=80",
+  baker: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80",
+  farm: "https://images.unsplash.com/photo-1595856453615-5ce82d54ea2c?auto=format&fit=crop&w=600&q=80",
 };
 
 function Home() {
@@ -46,32 +41,57 @@ function Home() {
     }
   };
 
-  const handleFindLocal = () => {
+  const handleFindLocal = async () => {
     if (!pincode.trim()) {
       alert("Please enter a pin code or address");
       return;
     }
-    // Update local storage so navbar and other components can use it
-    localStorage.setItem("qb_location_city", pincode);
-    setLocationCity(pincode);
-    alert(`Showing results for: ${pincode}`);
+    try {
+      const res = await axios.get(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(pincode)}`);
+      if (res.data && res.data.length > 0) {
+        const { lat, lon, display_name } = res.data[0];
+        const shortName = display_name.split(',')[0];
+        localStorage.setItem("qb_location_city", shortName);
+        localStorage.setItem("qb_lat", lat);
+        localStorage.setItem("qb_lng", lon);
+        setLocationCity(shortName);
+        window.dispatchEvent(new Event('locationChanged'));
+      } else {
+        alert("Location not found. Please try a different pincode or city.");
+      }
+    } catch (err) {
+      console.error("Geocoding failed", err);
+      alert("Error finding location.");
+    }
+  };
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const city = localStorage.getItem("qb_location_city") || "Mumbai, MH";
+      const lat = localStorage.getItem("qb_lat");
+      const lng = localStorage.getItem("qb_lng");
+      setLocationCity(city);
+      const radius = localStorage.getItem("qb_radius_km") || 50;
+      
+      let url = `${API_BASE_URL}/api/products`;
+      if (lat && lng) {
+        url = `${API_BASE_URL}/api/products/nearby?lat=${lat}&lng=${lng}&radiusKm=${radius}`;
+      }
+      
+      const response = await axios.get(url);
+      setProducts(response.data || []);
+    } catch (error) {
+      console.error("Home data load error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const city = localStorage.getItem("qb_location_city") || "Mumbai, MH";
-        setLocationCity(city);
-        const response = await axios.get(`${API_BASE_URL}/api/products`);
-        setProducts(response.data || []);
-      } catch (error) {
-        console.error("Home data load error:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchData();
+    window.addEventListener('locationChanged', fetchData);
+    return () => window.removeEventListener('locationChanged', fetchData);
   }, []);
 
   if (loading) {
@@ -176,6 +196,15 @@ function Home() {
         </div>
       </section>
 
+      {/* Map Section */}
+      <section className="qb-section-redesign" style={{ padding: "1rem 2rem 3rem" }}>
+        <div className="qb-section-header-redesign">
+          <h2>Shops in Your Area</h2>
+          <p style={{ color: "#64748b", margin: 0 }}>Showing stores within {localStorage.getItem("qb_radius_km") || 50}km</p>
+        </div>
+        <ShopMap />
+      </section>
+
       {/* Meet Your Makers */}
       <section className="qb-makers-section">
         <div className="qb-makers-header-redesign">
@@ -232,35 +261,7 @@ function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="qb-footer-redesign">
-        <div className="qb-footer-grid">
-          <div className="qb-footer-brand">
-            <h4>QuickBazaar</h4>
-            <p>
-              Your neighborhood's finest goods, <br /> delivered with care.
-            </p>
-          </div>
-          <div className="qb-footer-col">
-            <h5>About</h5>
-            <a href="#0">About Us</a>
-            <a href="#0">Merchant Info</a>
-          </div>
-          <div className="qb-footer-col">
-            <h5>Policy</h5>
-            <a href="#0">Privacy Policy</a>
-            <a href="#0">Terms of Service</a>
-          </div>
-          <div className="qb-footer-col">
-            <h5>Contact</h5>
-            <a href="#0">Support</a>
-            <a href="#0">Contact</a>
-          </div>
-        </div>
-        <div className="qb-footer-bottom">
-          © 2024 QuickBazaar Local Marketplace. All rights reserved.
-        </div>
-      </footer>
+      {/* Footer rendered in App.js */}
     </div>
   );
 }

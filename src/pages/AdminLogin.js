@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AdminAuthRedesign.css";
 
@@ -17,6 +17,9 @@ function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isSuperAdminView = searchParams.get("role") === "superadmin";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,15 +64,21 @@ function AdminLogin() {
       {/* Right Form Side */}
       <div className="qb-admin-auth-form-side">
         <div className="qb-admin-auth-form-shell">
-          <h2>Welcome Back</h2>
-          <p>Enter your details to access your account.</p>
+          <Link to="/" style={{ textDecoration: 'none', color: '#6366f1', display: 'inline-block', marginBottom: '1rem', fontWeight: 600 }}>
+            ← Back to Home
+          </Link>
+          <h2>{isSuperAdminView ? "SuperAdmin Login" : "Merchant Login"}</h2>
+          <p>{isSuperAdminView ? "Access your platform overview dashboard." : "Enter your details to access your account."}</p>
 
           <div className="qb-admin-auth-toggle">
             <button type="button" onClick={() => navigate("/login")}>
               Customer
             </button>
-            <button type="button" className="active">
-              Merchant / Admin
+            <button type="button" className={!isSuperAdminView ? "active" : ""} onClick={() => navigate("/admin/login")}>
+              Merchant
+            </button>
+            <button type="button" className={isSuperAdminView ? "active" : ""} onClick={() => navigate("/admin/login?role=superadmin")}>
+              Super Admin
             </button>
           </div>
 

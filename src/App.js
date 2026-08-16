@@ -18,6 +18,7 @@ import AdminAddProduct from "./pages/AdminAddProduct";
 import AdminOrders from "./pages/AdminOrders";
 import AdminCategories from "./pages/AdminCategories";
 import AdminShops from "./pages/AdminShops";
+import AdminShopOwners from "./pages/AdminShopOwners";
 import AdminSupport from "./pages/AdminSupport";
 import Navbar from "./Navbar";
 import { CartProvider } from "./context/CartContext";
@@ -54,7 +55,10 @@ function App() {
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/admin/categories" element={<AdminCategories />} />
           <Route path="/admin/shops" element={<AdminShops />} />
+          <Route path="/admin/shop-owners" element={<AdminShopOwners />} />
           <Route path="/admin/support" element={<AdminSupport />} />
+          <Route path="/admin/customers" element={<AdminDashboard />} />
+          <Route path="/admin/settings" element={<AdminDashboard />} />
 
           {/* Regular Routes (with navbar) */}
           <Route

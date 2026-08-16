@@ -199,7 +199,7 @@ function Profile() {
                   <div className="qb-input-group">
                     <label>Last Name</label>
                     <input
-                      value={formData.name.split(" ")[1] || ""}
+                      value={formData.name.split(" ").slice(1).join(" ")}
                       onChange={(e) =>
                         setFormData({
                           ...formData,

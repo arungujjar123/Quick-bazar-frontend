@@ -15,6 +15,7 @@ function Categories() {
   const location = useLocation();
   const queryParam = new URLSearchParams(location.search).get("q") || "";
   const [search, setSearch] = useState(queryParam);
+  const [expandedCats, setExpandedCats] = useState({});
 
   const getPlaceholderImage = (label) => {
     const safeLabel = (label || "Category").toString().trim().slice(0, 16);
@@ -34,21 +35,30 @@ function Categories() {
     return getPlaceholderImage(product?.name || product?.category);
   };
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/products`);
-        setProducts(response.data || []);
-      } catch (error) {
-        console.error("Failed to fetch categories page data:", error);
-        setProducts([]);
-      } finally {
-        setLoading(false);
+  const loadProducts = async () => {
+    setLoading(true);
+    try {
+      const lat = localStorage.getItem("qb_lat");
+      const lng = localStorage.getItem("qb_lng");
+      const radius = localStorage.getItem("qb_radius_km") || 50;
+      let url = `${API_BASE_URL}/api/products`;
+      if (lat && lng) {
+        url = `${API_BASE_URL}/api/products/nearby?lat=${lat}&lng=${lng}&radiusKm=${radius}`;
       }
-    };
+      const response = await axios.get(url);
+      setProducts(response.data || []);
+    } catch (error) {
+      console.error("Failed to fetch categories page data:", error);
+      setProducts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     loadProducts();
+    window.addEventListener('locationChanged', loadProducts);
+    return () => window.removeEventListener('locationChanged', loadProducts);
   }, []);
 
   const categoryCards = useMemo(() => {
@@ -66,9 +76,11 @@ function Categories() {
           count: 1,
           sample: product,
           topProducts: [product],
+          allProducts: [product],
         });
       } else {
         current.count += 1;
+        current.allProducts.push(product);
         if (current.topProducts.length < 3) {
           current.topProducts.push(product);
         }
@@ -83,6 +95,10 @@ function Categories() {
       card.name.toLowerCase().includes(search.toLowerCase()),
     );
   }, [products, search]);
+
+  const toggleExpand = (key) => {
+    setExpandedCats((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   if (loading) {
     return (
@@ -188,7 +204,7 @@ function Categories() {
               </header>
 
               <div className="qb-category-products-mini">
-                {card.topProducts.map((item) => (
+                {(expandedCats[card.key] ? card.allProducts : card.topProducts).map((item) => (
                   <Link key={item._id} to={`/product/${item._id}`}>
                     <span>{item.name}</span>
                     <strong>₹{Number(item.price || 0).toFixed(2)}</strong>
@@ -196,9 +212,22 @@ function Categories() {
                 ))}
               </div>
 
-              <Link to={`/?view=shop`} className="qb-category-view-all">
-                View All →
-              </Link>
+              {card.allProducts.length > 3 && (
+                <button 
+                  onClick={() => toggleExpand(card.key)} 
+                  className="qb-category-view-all"
+                  style={{ 
+                    background: "none", 
+                    border: "none", 
+                    cursor: "pointer", 
+                    width: "100%", 
+                    fontFamily: "inherit",
+                    fontSize: "1rem"
+                  }}
+                >
+                  {expandedCats[card.key] ? "Show Less ↑" : "View All →"}
+                </button>
+              )}
             </article>
           ))}
         </section>

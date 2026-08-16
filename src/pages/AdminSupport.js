@@ -12,7 +12,18 @@ const API_BASE_URL =
 function AdminSupport() {
   const [syncing, setSyncing] = useState(false);
   const [status, setStatus] = useState(null);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const adminInfoStr = localStorage.getItem("adminInfo");
+    if (adminInfoStr) {
+      try {
+        const info = JSON.parse(adminInfoStr);
+        setIsSuperAdmin(info.role === "super_admin");
+      } catch (e) {}
+    }
+  }, []);
 
   const handleSync = async () => {
     setSyncing(true);
@@ -52,20 +63,40 @@ function AdminSupport() {
         </div>
         <nav className="qb-admin-menu">
           <button onClick={() => navigate("/admin/dashboard")}>
-            📊 Dashboard
+            <span>📊</span> Dashboard
           </button>
-          <button onClick={() => navigate("/admin/products")}>
-            📦 Inventory
-          </button>
-          <button onClick={() => navigate("/admin/orders")}>🧾 Orders</button>
+          
+          {isSuperAdmin ? (
+            <button onClick={() => navigate("/admin/shop-owners")}>
+              <span>🏪</span> Platform Owners
+            </button>
+          ) : (
+            <>
+              <button onClick={() => navigate("/admin/products")}>
+                <span>📦</span> Inventory
+              </button>
+              <button onClick={() => navigate("/admin/orders")}>
+                <span>🧾</span> Orders
+              </button>
+              <button onClick={() => navigate("/admin/shops")}>
+                <span>🏪</span> Shops
+              </button>
+            </>
+          )}
+          
           <button className="active" onClick={() => navigate("/admin/support")}>
-            🤖 AI Agent
+            <span>🤖</span> AI Agent
           </button>
+          {!isSuperAdmin && (
+            <button onClick={() => navigate("/admin/customers")}>
+              <span>👥</span> Customers
+            </button>
+          )}
           <button onClick={() => navigate("/admin/categories")}>
-            📁 Categories
+            <span>📁</span> Categories
           </button>
           <button onClick={() => navigate("/admin/settings")}>
-            ⚙️ Settings
+            <span>⚙️</span> Settings
           </button>
         </nav>
         <div className="qb-admin-sidebar-bottom">
@@ -160,11 +191,16 @@ function AdminSupport() {
                   }}
                 >
                   <li>
-                    Products Indexed: {status.summary?.productsCount || "N/A"}
+                    Total Documents Indexed: {status.summary?.total || "N/A"}
                   </li>
-                  <li>
-                    Support Docs Synced: {status.summary?.docsCount || "N/A"}
-                  </li>
+                  {status.summary?.byType && (
+                    <>
+                      <li>Products: {status.summary.byType.product || 0}</li>
+                      <li>Categories: {status.summary.byType.category || 0}</li>
+                      <li>Shops: {status.summary.byType.shop || 0}</li>
+                      <li>Policies: {status.summary.byType.policy || 0}</li>
+                    </>
+                  )}
                   <li>
                     Vector Store Rebuilt:{" "}
                     {status.vectorStoreRebuilt ? "Yes" : "No"}

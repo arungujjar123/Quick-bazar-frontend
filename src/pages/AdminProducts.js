@@ -25,9 +25,17 @@ function AdminProducts() {
     category: "",
     stock: "",
   });
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const adminInfoStr = localStorage.getItem("adminInfo");
+    if (adminInfoStr) {
+      try {
+        const info = JSON.parse(adminInfoStr);
+        setIsSuperAdmin(info.role === "super_admin");
+      } catch (e) {}
+    }
     checkAdminAuth();
     fetchProducts();
   }, []);
@@ -210,23 +218,43 @@ function AdminProducts() {
         </button>
         <nav className="qb-admin-menu">
           <button onClick={() => navigate("/admin/dashboard")}>
-            📊 Dashboard
+            <span>📊</span> Dashboard
           </button>
-          <button
-            className="active"
-            onClick={() => navigate("/admin/products")}
-          >
-            📦 Inventory
-          </button>
-          <button onClick={() => navigate("/admin/orders")}>🧾 Orders</button>
+          
+          {isSuperAdmin ? (
+            <button onClick={() => navigate("/admin/shop-owners")}>
+              <span>🏪</span> Platform Owners
+            </button>
+          ) : (
+            <>
+              <button
+                className="active"
+                onClick={() => navigate("/admin/products")}
+              >
+                <span>📦</span> Inventory
+              </button>
+              <button onClick={() => navigate("/admin/orders")}>
+                <span>🧾</span> Orders
+              </button>
+              <button onClick={() => navigate("/admin/shops")}>
+                <span>🏪</span> Shops
+              </button>
+            </>
+          )}
+          
           <button onClick={() => navigate("/admin/support")}>
-            🤖 AI Agent
+            <span>🤖</span> AI Agent
           </button>
+          {!isSuperAdmin && (
+            <button onClick={() => navigate("/admin/customers")}>
+              <span>👥</span> Customers
+            </button>
+          )}
           <button onClick={() => navigate("/admin/categories")}>
-            📁 Categories
+            <span>📁</span> Categories
           </button>
           <button onClick={() => navigate("/admin/settings")}>
-            ⚙️ Settings
+            <span>⚙️</span> Settings
           </button>
         </nav>
         <div className="qb-admin-sidebar-bottom">
@@ -353,6 +381,64 @@ function AdminProducts() {
           </article>
         </section>
       </main>
+
+      {/* Edit Product Modal */}
+      {editingProduct && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: "rgba(0,0,0,0.5)", zIndex: 1000,
+          display: "flex", justifyContent: "center", alignItems: "center"
+        }}>
+          <div style={{
+            background: "white", padding: "2rem", borderRadius: "16px",
+            width: "500px", maxWidth: "90%", maxHeight: "90vh", overflowY: "auto",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.2)"
+          }}>
+            <h2 style={{marginTop: 0, marginBottom: "1.5rem", color: "#1e293b"}}>Edit Product</h2>
+            <div style={{display: "flex", flexDirection: "column", gap: "1rem"}}>
+              <div>
+                <label style={{display: "block", marginBottom: "0.25rem", fontWeight: "600", fontSize: "0.9rem"}}>Name</label>
+                <input style={{width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #e2e8f0"}} 
+                       value={editForm.name || ""} onChange={(e) => setEditForm({...editForm, name: e.target.value})} />
+              </div>
+              <div>
+                <label style={{display: "block", marginBottom: "0.25rem", fontWeight: "600", fontSize: "0.9rem"}}>Price (₹)</label>
+                <input type="number" style={{width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #e2e8f0"}} 
+                       value={editForm.price || ""} onChange={(e) => setEditForm({...editForm, price: e.target.value})} />
+              </div>
+              <div>
+                <label style={{display: "block", marginBottom: "0.25rem", fontWeight: "600", fontSize: "0.9rem"}}>Category</label>
+                <select style={{width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #e2e8f0"}}
+                        value={editForm.category || ""} onChange={(e) => setEditForm({...editForm, category: e.target.value})}>
+                  <option value="">Select Category...</option>
+                  {categories.filter(c => c !== "all").map(c => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label style={{display: "block", marginBottom: "0.25rem", fontWeight: "600", fontSize: "0.9rem"}}>Stock</label>
+                <input type="number" style={{width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #e2e8f0"}} 
+                       value={editForm.stock !== undefined ? editForm.stock : ""} onChange={(e) => setEditForm({...editForm, stock: e.target.value})} />
+              </div>
+              <div>
+                <label style={{display: "block", marginBottom: "0.25rem", fontWeight: "600", fontSize: "0.9rem"}}>Image URL</label>
+                <input style={{width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #e2e8f0"}} 
+                       value={editForm.image || ""} onChange={(e) => setEditForm({...editForm, image: e.target.value})} />
+              </div>
+              <div>
+                <label style={{display: "block", marginBottom: "0.25rem", fontWeight: "600", fontSize: "0.9rem"}}>Description</label>
+                <textarea style={{width: "100%", padding: "0.75rem", borderRadius: "8px", border: "1px solid #e2e8f0", minHeight: "80px"}} 
+                          value={editForm.description || ""} onChange={(e) => setEditForm({...editForm, description: e.target.value})} />
+              </div>
+            </div>
+            <div style={{display: "flex", justifyContent: "flex-end", gap: "1rem", marginTop: "1.5rem"}}>
+              <button style={{padding: "0.75rem 1.5rem", borderRadius: "8px", border: "1px solid #e2e8f0", background: "white", cursor: "pointer", fontWeight: "600"}} onClick={() => setEditingProduct(null)}>Cancel</button>
+              <button style={{padding: "0.75rem 1.5rem", borderRadius: "8px", border: "none", background: "var(--admin-primary)", color: "white", cursor: "pointer", fontWeight: "600"}} onClick={() => handleSaveEdit(editingProduct)}>Save Changes</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

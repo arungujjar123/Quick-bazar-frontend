@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AdminAuthRedesign.css";
 
@@ -12,7 +12,6 @@ const API_BASE_URL =
 function AdminRegister() {
   const [formData, setFormData] = useState({
     name: "",
-    shopName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -23,6 +22,9 @@ function AdminRegister() {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isSuperAdminView = searchParams.get("role") === "superadmin";
 
   const handleChange = (e) => {
     setFormData({
@@ -36,6 +38,12 @@ function AdminRegister() {
     setError("");
     setSuccess("");
     setLoading(true);
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.secretKey.trim()) {
+      setError("Please fill out all required fields properly");
+      setLoading(false);
+      return;
+    }
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
@@ -57,10 +65,10 @@ function AdminRegister() {
 
     try {
       const requestData = {
-        name: formData.name,
-        email: formData.email,
+        name: formData.name.trim(),
+        email: formData.email.trim(),
         password: formData.password,
-        secretKey: formData.secretKey,
+        secretKey: formData.secretKey.trim(),
       };
 
       const response = await axios.post(
@@ -102,15 +110,21 @@ function AdminRegister() {
       {/* Right Form Side */}
       <div className="qb-admin-auth-form-side" style={{ overflowY: "auto" }}>
         <div className="qb-admin-auth-form-shell">
-          <h2>Create Merchant Account</h2>
-          <p>Start selling your artisanal products today.</p>
+          <Link to="/" style={{ textDecoration: 'none', color: '#6366f1', display: 'inline-block', marginBottom: '1rem', fontWeight: 600 }}>
+            ← Back to Home
+          </Link>
+          <h2>{isSuperAdminView ? "Create SuperAdmin Account" : "Create Merchant Account"}</h2>
+          <p>{isSuperAdminView ? "Manage the entire platform and commissions." : "Start selling your artisanal products today."}</p>
 
           <div className="qb-admin-auth-toggle">
             <button type="button" onClick={() => navigate("/register")}>
               Customer
             </button>
-            <button type="button" className="active">
-              Merchant / Admin
+            <button type="button" className={!isSuperAdminView ? "active" : ""} onClick={() => navigate("/admin/register")}>
+              Merchant
+            </button>
+            <button type="button" className={isSuperAdminView ? "active" : ""} onClick={() => navigate("/admin/register?role=superadmin")}>
+              Super Admin
             </button>
           </div>
 
@@ -136,7 +150,7 @@ function AdminRegister() {
                 gap: "1rem",
               }}
             >
-              <div className="qb-admin-auth-group">
+              <div className="qb-admin-auth-group" style={{ gridColumn: "span 2" }}>
                 <label>Full Name</label>
                 <div className="qb-admin-auth-input-wrapper">
                   <span>👤</span>
@@ -146,18 +160,6 @@ function AdminRegister() {
                     onChange={handleChange}
                     placeholder="Rahul Sharma"
                     required
-                  />
-                </div>
-              </div>
-              <div className="qb-admin-auth-group">
-                <label>Shop Name</label>
-                <div className="qb-admin-auth-input-wrapper">
-                  <span>🏪</span>
-                  <input
-                    name="shopName"
-                    value={formData.shopName}
-                    onChange={handleChange}
-                    placeholder="Artisan Goods"
                   />
                 </div>
               </div>
@@ -216,7 +218,7 @@ function AdminRegister() {
             </div>
 
             <div className="qb-admin-auth-group">
-              <label>Admin Secret Key</label>
+              <label>{isSuperAdminView ? "Super Admin Master Key" : "Admin Secret Key"}</label>
               <div className="qb-admin-auth-input-wrapper">
                 <span>🔑</span>
                 <input
