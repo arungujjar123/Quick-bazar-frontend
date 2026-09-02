@@ -20,6 +20,8 @@ import AdminCategories from "./pages/AdminCategories";
 import AdminShops from "./pages/AdminShops";
 import AdminShopOwners from "./pages/AdminShopOwners";
 import AdminSupport from "./pages/AdminSupport";
+import AdminBulkUpload from "./pages/AdminBulkUpload";
+import AdminAutoSync from "./pages/AdminAutoSync";
 import Navbar from "./Navbar";
 import { CartProvider } from "./context/CartContext";
 import SupportChatWidget from "./components/SupportChatWidget";
@@ -57,6 +59,8 @@ function App() {
           <Route path="/admin/shops" element={<AdminShops />} />
           <Route path="/admin/shop-owners" element={<AdminShopOwners />} />
           <Route path="/admin/support" element={<AdminSupport />} />
+          <Route path="/admin/bulk-upload" element={<AdminBulkUpload />} />
+          <Route path="/admin/auto-sync" element={<AdminAutoSync />} />
           <Route path="/admin/customers" element={<AdminDashboard />} />
           <Route path="/admin/settings" element={<AdminDashboard />} />
 
@@ -132,6 +136,18 @@ function App() {
           <Route
             path="/register"
             element={<Register />}
+          />
+          <Route
+            path="*"
+            element={
+              <UserLayout>
+                <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
+                  <h1 style={{ fontSize: '4rem', fontWeight: 800, color: '#e2e8f0' }}>404</h1>
+                  <p style={{ fontSize: '1.25rem', color: '#94a3b8', marginBottom: '2rem' }}>Page not found</p>
+                  <a href="/" style={{ color: '#2563eb', fontWeight: 600, textDecoration: 'none' }}>← Back to Home</a>
+                </div>
+              </UserLayout>
+            }
           />
         </Routes>
       </Router>

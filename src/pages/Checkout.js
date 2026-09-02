@@ -20,7 +20,7 @@ function Checkout() {
     phone: "",
   });
   const [shippingMethod, setShippingMethod] = useState("standard");
-  const [paymentMethod, setPaymentMethod] = useState("card");
+  const [paymentMethod, setPaymentMethod] = useState("cod");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ function Checkout() {
       alert("Order placed successfully!");
       navigate("/profile");
     } catch (err) {
-      alert("Checkout failed. Please try again.");
+      alert(err.response?.data?.message || "Checkout failed. Please try again.");
     } finally {
       setLoading(false);
     }

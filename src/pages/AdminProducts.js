@@ -270,9 +270,41 @@ function AdminProducts() {
             <h1>Products Inventory</h1>
             <p>Manage your artisanal marketplace offerings and stock levels.</p>
           </div>
-          <button onClick={() => navigate("/admin/add-product")}>
-            + Add New Product
-          </button>
+          <div style={{ display: "flex", gap: "0.75rem" }}>
+            <button
+              onClick={() => navigate("/admin/auto-sync")}
+              style={{
+                background: "linear-gradient(135deg, #10b981, #059669)",
+                color: "white",
+                border: "none",
+                padding: "0.5rem 1rem",
+                borderRadius: "8px",
+                fontWeight: 600,
+                cursor: "pointer",
+                fontSize: "0.85rem",
+              }}
+            >
+              🔄 Live Auto-Sync
+            </button>
+            <button
+              onClick={() => navigate("/admin/bulk-upload")}
+              style={{
+                background: "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+                color: "white",
+                border: "none",
+                padding: "0.5rem 1rem",
+                borderRadius: "8px",
+                fontWeight: 600,
+                cursor: "pointer",
+                fontSize: "0.85rem",
+              }}
+            >
+              📤 Bulk Import Stock
+            </button>
+            <button onClick={() => navigate("/admin/add-product")}>
+              + Add New Product
+            </button>
+          </div>
         </header>
 
         <div className="qb-admin-toolbar-row">

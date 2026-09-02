@@ -40,12 +40,12 @@ export const CartProvider = ({ children }) => {
       setCartItemCount(totalItems);
       setCart(response.data);
     } catch (error) {
-      console.error("Error fetching cart:", error);
-
-      // Handle authentication errors
+      // Handle authentication errors silently (guest or admin user)
       if (error.response?.status === 401) {
-        localStorage.removeItem("token"); // Remove invalid token
+        localStorage.removeItem("token");
         setCartItemCount(0);
+      } else {
+        console.error("Error fetching cart:", error);
       }
 
       setCartItemCount(0);

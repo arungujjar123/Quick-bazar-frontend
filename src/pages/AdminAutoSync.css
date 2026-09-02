@@ -1,0 +1,405 @@
+/* ===========================================
+   ADMIN AUTO-SYNC - Stylesheet
+   =========================================== */
+
+.autosync-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 840px;
+}
+
+.autosync-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.autosync-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Highlight Card */
+.highlight-card {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: #93c5fd;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.highlight-icon {
+  font-size: 2.5rem;
+}
+
+.highlight-card h3 {
+  color: #1e40af;
+  margin-bottom: 0.35rem;
+}
+
+.highlight-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #1e3a8a;
+  line-height: 1.5;
+}
+
+/* Form Styles */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.autosync-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #1e293b;
+  background: #f8fafc;
+  transition: all 0.2s;
+}
+
+.autosync-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.input-help {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.input-help code {
+  background: #e2e8f0;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* Toggle Switch */
+.form-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.form-group-toggle strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.form-group-toggle p {
+  margin: 2px 0 0 0;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* Switch UI */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  min-width: 50px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background-color: #22c55e;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* Buttons */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-save-config {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-save-config:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.btn-sync-now {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.btn-sync-now:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+}
+
+.btn-save-config:disabled,
+.btn-sync-now:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Status Card */
+.status-card {
+  background: #f8fafc;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.status-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: white;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.status-item span {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.status-item strong {
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.status-badge {
+  font-size: 0.8rem !important;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.status-success {
+  background: #dcfce7;
+  color: #15803d !important;
+}
+
+.status-failed {
+  background: #fee2e2;
+  color: #dc2626 !important;
+}
+
+.status-none {
+  background: #f1f5f9;
+  color: #64748b !important;
+}
+
+.status-log-box {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-family: monospace;
+}
+
+.status-log-box strong {
+  display: block;
+  color: #38bdf8;
+  margin-bottom: 0.35rem;
+}
+
+.status-log-box p {
+  margin: 0;
+  word-break: break-all;
+}
+
+/* Alerts */
+.autosync-alert {
+  padding: 1.25rem;
+  border-radius: 10px;
+}
+
+.autosync-alert h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.alert-success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+}
+
+.alert-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+/* Stat Pills */
+.result-stats-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.stat-blue {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.stat-green {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.stat-amber {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.stat-purple {
+  background: #f3e8ff;
+  color: #7e22ce;
+}
+
+/* Guide Card */
+.guide-card {
+  background: #fff;
+}
+
+.guide-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.guide-col h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+  color: #2563eb;
+}
+
+.guide-col ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.8rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.guide-col code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .guide-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-save-config,
+  .btn-sync-now {
+    width: 100%;
+    justify-content: center;
+  }
+}
