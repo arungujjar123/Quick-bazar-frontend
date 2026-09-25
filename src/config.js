@@ -1,3 +1,3 @@
 export const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
-  "https://asus-dallas-beds-diesel.trycloudflare.com";
+  "https://tear-isa-kings-bruce.trycloudflare.com";

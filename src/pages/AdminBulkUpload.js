@@ -7,7 +7,7 @@ import "./AdminBulkUpload.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://asus-dallas-beds-diesel.trycloudflare.com"
+    ? "https://tear-isa-kings-bruce.trycloudflare.com"
     : "http://localhost:5000");
 
 function AdminBulkUpload() {
