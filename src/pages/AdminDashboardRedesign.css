@@ -119,11 +119,7 @@
 }
 
 .qb-admin-sidebar-bottom {
-  border-top: 1px solid var(--admin-border);
-  padding-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-top: auto;
 }
 
 /* Main Content Area */
