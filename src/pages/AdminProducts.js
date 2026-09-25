@@ -354,12 +354,16 @@ function AdminProducts() {
                         src={
                           product.imageUrl ||
                           product.image ||
-                          getPlaceholderImage(product.name)
+                          getPlaceholderImage(product.name || "Product")
                         }
-                        alt={product.name}
+                        alt={product.name || "Product"}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = getPlaceholderImage(product.name || "Product");
+                        }}
                       />
                       <div>
-                        <strong>{product.name}</strong>
+                        <strong>{product.name || `Item #${product._id.slice(-4).toUpperCase()}`}</strong>
                         <small>ID: {product._id.slice(-6).toUpperCase()}</small>
                       </div>
                     </div>
