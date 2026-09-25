@@ -128,6 +128,16 @@ function AdminAutoSync() {
 
     const token = localStorage.getItem("adminToken");
     try {
+      // 1. Auto-save current sync settings first
+      await axios.put(
+        `${API_BASE_URL}/api/admin/shops/${selectedShop}/sync-config`,
+        { syncUrl: syncUrl.trim(), syncEnabled },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      // 2. Trigger sync now
       const response = await axios.post(
         `${API_BASE_URL}/api/admin/shops/${selectedShop}/sync-now`,
         {},
@@ -144,7 +154,8 @@ function AdminAutoSync() {
 
       fetchShopSyncStatus(selectedShop);
     } catch (err) {
-      setError(err.response?.data?.message || "Sync failed. Please check your link.");
+      const errMsg = err.response?.data?.message || "Sync failed. Please check your link sharing permissions and file format.";
+      setError(errMsg);
       fetchShopSyncStatus(selectedShop);
     } finally {
       setSyncing(false);
