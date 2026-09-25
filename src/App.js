@@ -22,6 +22,8 @@ import AdminShopOwners from "./pages/AdminShopOwners";
 import AdminSupport from "./pages/AdminSupport";
 import AdminBulkUpload from "./pages/AdminBulkUpload";
 import AdminAutoSync from "./pages/AdminAutoSync";
+import AdminCustomers from "./pages/AdminCustomers";
+import AdminSettings from "./pages/AdminSettings";
 import Navbar from "./Navbar";
 import { CartProvider } from "./context/CartContext";
 import SupportChatWidget from "./components/SupportChatWidget";
@@ -61,8 +63,8 @@ function App() {
           <Route path="/admin/support" element={<AdminSupport />} />
           <Route path="/admin/bulk-upload" element={<AdminBulkUpload />} />
           <Route path="/admin/auto-sync" element={<AdminAutoSync />} />
-          <Route path="/admin/customers" element={<AdminDashboard />} />
-          <Route path="/admin/settings" element={<AdminDashboard />} />
+          <Route path="/admin/customers" element={<AdminCustomers />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
 
           {/* Regular Routes (with navbar) */}
           <Route
