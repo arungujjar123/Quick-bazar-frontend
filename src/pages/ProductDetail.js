@@ -82,32 +82,35 @@ function ProductDetail() {
             <div className="qb-main-img-wrapper">
               <img src={product.imageUrl || product.image} alt={product.name} />
             </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(4, 1fr)",
-                gap: "1rem",
-              }}
-            >
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  style={{
-                    borderRadius: "12px",
-                    overflow: "hidden",
-                    background: "#f8fafc",
-                    border: "1px solid #f1f5f9",
-                    cursor: "pointer",
-                  }}
-                >
-                  <img
-                    src={product.imageUrl || product.image}
-                    style={{ width: "100%", opacity: 0.6 }}
-                    alt="thumb"
-                  />
-                </div>
-              ))}
-            </div>
+            {Array.isArray(product.images) && product.images.length > 1 && (
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `repeat(${Math.min(product.images.length, 4)}, 1fr)`,
+                  gap: "0.75rem",
+                }}
+              >
+                {product.images.slice(0, 4).map((imgUrl, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                      background: "#f8fafc",
+                      border: "1px solid #e2e8f0",
+                      cursor: "pointer",
+                      height: "70px",
+                    }}
+                  >
+                    <img
+                      src={imgUrl}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      alt={`thumb-${i}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Content */}
