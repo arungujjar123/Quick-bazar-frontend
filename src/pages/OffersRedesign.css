@@ -1,16 +1,16 @@
 .qb-offers-page {
   padding-bottom: 5rem;
   min-height: 100vh;
-  background: #fafaf9; /* Warm light background */
+  background: #f8fafc;
 }
 
 .qb-offers-hero {
   background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%);
   color: white;
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   text-align: center;
-  border-radius: 0 0 40px 40px;
-  margin-bottom: 4rem;
+  border-radius: 0 0 32px 32px;
+  margin-bottom: 3rem;
   position: relative;
   overflow: hidden;
 }
@@ -42,29 +42,29 @@
   display: inline-block;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  padding: 0.5rem 1.5rem;
+  padding: 0.4rem 1.2rem;
   border-radius: 30px;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 1.5rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .qb-offers-hero h1 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 900;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   line-height: 1.1;
 }
 
 .qb-offers-hero h1 span {
-  color: #fbbf24; /* Golden yellow */
+  color: #fbbf24;
 }
 
 .qb-offers-hero p {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   opacity: 0.9;
   max-width: 600px;
   margin: 0 auto;
@@ -81,45 +81,167 @@
 }
 
 .qb-offers-header h2 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #0f172a;
 }
 
+/* ============================================
+   GRID & PRODUCT CARDS REDESIGN
+   ============================================ */
+.qb-product-grid-redesign {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+}
+
+.qb-product-card-redesign {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f1f5f9;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.qb-product-card-redesign:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+.qb-sale-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #e11d48, #f43f5e);
+  color: white;
+  padding: 0.35rem 0.85rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  z-index: 5;
+  box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.qb-product-card-img-wrap {
+  width: 100%;
+  height: 210px;
+  overflow: hidden;
+  background: #f8fafc;
+  position: relative;
+}
+
+.qb-product-card-img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.qb-product-card-redesign:hover .qb-product-card-img {
+  transform: scale(1.08);
+}
+
+.qb-product-card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.qb-product-card-body h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.35rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.qb-product-card-body p {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0 0 1rem 0;
+  font-weight: 500;
+}
+
+.qb-product-card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #f1f5f9;
+}
+
+.qb-add-btn {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.qb-add-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #1d4ed8, #2563eb);
+}
+
+/* ============================================
+   PROMOTIONAL BANNERS
+   ============================================ */
 .qb-promo-banners {
   max-width: 1280px;
   margin: 4rem auto;
   padding: 0 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 2rem;
 }
 
 .qb-promo-banner {
   border-radius: 24px;
-  padding: 3rem;
+  padding: 3rem 2.5rem;
   display: flex;
   align-items: center;
   position: relative;
   overflow: hidden;
   color: white;
-  min-height: 250px;
+  min-height: 220px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .qb-promo-1 {
-  background: linear-gradient(45deg, #be123c, #e11d48);
+  background: linear-gradient(135deg, #be123c, #e11d48);
 }
 
 .qb-promo-2 {
-  background: linear-gradient(45deg, #047857, #10b981);
+  background: linear-gradient(135deg, #047857, #10b981);
 }
 
 .qb-promo-banner::after {
   content: '🏷️';
   position: absolute;
-  right: -20px;
-  bottom: -40px;
-  font-size: 10rem;
+  right: -10px;
+  bottom: -30px;
+  font-size: 8rem;
   opacity: 0.2;
   transform: rotate(-15deg);
 }
@@ -127,33 +249,48 @@
 .qb-promo-text {
   position: relative;
   z-index: 2;
-  max-width: 70%;
+  max-width: 75%;
 }
 
 .qb-promo-text h3 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
 }
 
 .qb-promo-text p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  opacity: 0.9;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
 }
 
 .qb-promo-btn {
   display: inline-block;
   background: white;
   color: #0f172a;
-  padding: 0.8rem 2rem;
+  padding: 0.75rem 1.75rem;
   border-radius: 30px;
   font-weight: 700;
   text-decoration: none;
+  font-size: 0.9rem;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .qb-promo-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .qb-offers-hero h1 {
+    font-size: 2.25rem;
+  }
+  .qb-product-grid-redesign {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .qb-promo-banners {
+    grid-template-columns: 1fr;
+  }
 }

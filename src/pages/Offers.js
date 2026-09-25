@@ -112,43 +112,46 @@ function Offers() {
                 key={product._id}
                 className="qb-product-card-redesign"
                 onClick={() => navigate(`/product/${product._id}`)}
-                style={{ cursor: "pointer" }}
               >
                 <div className="qb-sale-badge">{product.discount}% OFF</div>
-                <img
-                  src={
-                    product.imageUrl ||
-                    product.image ||
-                    "https://via.placeholder.com/300?text=Product"
-                  }
-                  alt={product.name}
-                  className="qb-product-card-img"
-                />
-                <h3>{product.name}</h3>
-                <p>{product.category || "Local Product"}</p>
-                <div className="qb-product-card-price-row">
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <span
-                      style={{
-                        fontSize: "0.8rem",
-                        textDecoration: "line-through",
-                        color: "var(--text-muted)",
-                      }}
-                    >
-                      ₹{product.oldPrice.toFixed(2)}
-                    </span>
-                    <strong style={{ color: "#e11d48" }}>
-                      ₹{Number(product.price).toFixed(2)}
-                    </strong>
-                  </div>
-                  <button
-                    className="qb-add-btn"
-                    onClick={(e) =>
-                      handleAddToCart(e, product._id, product.name)
+                <div className="qb-product-card-img-wrap">
+                  <img
+                    src={
+                      product.imageUrl ||
+                      product.image ||
+                      "https://images.unsplash.com/photo-1542838132-92c53300491e?w=500"
                     }
-                  >
-                    +
-                  </button>
+                    alt={product.name}
+                    className="qb-product-card-img"
+                  />
+                </div>
+                <div className="qb-product-card-body">
+                  <h3>{product.name}</h3>
+                  <p>{product.category || "Local Product"}</p>
+                  <div className="qb-product-card-price-row">
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <span
+                        style={{
+                          fontSize: "0.8rem",
+                          textDecoration: "line-through",
+                          color: "#94a3b8",
+                        }}
+                      >
+                        ₹{product.oldPrice.toFixed(2)}
+                      </span>
+                      <strong style={{ color: "#e11d48", fontSize: "1.1rem" }}>
+                        ₹{Number(product.price).toFixed(2)}
+                      </strong>
+                    </div>
+                    <button
+                      className="qb-add-btn"
+                      onClick={(e) =>
+                        handleAddToCart(e, product._id, product.name)
+                      }
+                    >
+                      + Add
+                    </button>
+                  </div>
                 </div>
               </article>
             ))}
