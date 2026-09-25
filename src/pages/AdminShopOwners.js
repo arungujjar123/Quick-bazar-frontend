@@ -138,6 +138,7 @@ function AdminShopOwners() {
       s.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       s.city?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       s.address?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      s.pincode?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       s.owner?.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       s.owner?.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -201,7 +202,7 @@ function AdminShopOwners() {
             <div className="qb-admin-search-box">
               <input
                 type="text"
-                placeholder="Search owners, shops, cities..."
+                placeholder="Search by owner, shop name, pincode (e.g. 281403)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -384,6 +385,20 @@ function AdminShopOwners() {
                                     >
                                       📍 {shop.address}, {shop.city}
                                     </span>
+                                    <span
+                                      style={{
+                                        padding: "0.15rem 0.5rem",
+                                        borderRadius: "6px",
+                                        background: "#eff6ff",
+                                        color: "#2563eb",
+                                        fontWeight: 700,
+                                        fontSize: "0.8rem",
+                                        marginLeft: "0.75rem",
+                                        border: "1px solid #bfdbfe",
+                                      }}
+                                    >
+                                      📌 Pincode: {shop.pincode || "281403"}
+                                    </span>
                                   </div>
                                   <button
                                     onClick={() => handleDeleteShop(shop._id, shop.name)}
@@ -430,6 +445,7 @@ function AdminShopOwners() {
                   <th>Shop Name</th>
                   <th>Owner</th>
                   <th>Location</th>
+                  <th>Pincode</th>
                   <th>Products</th>
                   <th>Status</th>
                   <th>Actions</th>
@@ -449,6 +465,22 @@ function AdminShopOwners() {
                     </td>
                     <td>
                       {shop.address}, {shop.city}
+                    </td>
+                    <td>
+                      <span
+                        style={{
+                          padding: "0.25rem 0.6rem",
+                          borderRadius: "6px",
+                          background: "#eff6ff",
+                          color: "#2563eb",
+                          fontWeight: 700,
+                          fontSize: "0.85rem",
+                          border: "1px solid #bfdbfe",
+                          display: "inline-block",
+                        }}
+                      >
+                        📌 {shop.pincode || "281403"}
+                      </span>
                     </td>
                     <td style={{ fontWeight: 700 }}>{shop.productCount || 0}</td>
                     <td>
@@ -486,7 +518,7 @@ function AdminShopOwners() {
                 ))}
                 {filteredShops.length === 0 && (
                   <tr>
-                    <td colSpan="6" style={{ textAlign: "center", padding: "2rem" }}>
+                    <td colSpan="7" style={{ textAlign: "center", padding: "2rem" }}>
                       No platform shops matching "{searchQuery}" found.
                     </td>
                   </tr>
