@@ -7,7 +7,7 @@ import "./CheckoutRedesign.css";
 const API_BASE_URL =
   process.env.REACT_APP_API_BASE_URL ||
   (process.env.NODE_ENV === "production"
-    ? "https://quick-bazar-backend.vercel.app"
+    ? "https://asus-dallas-beds-diesel.trycloudflare.com"
     : "http://localhost:5000");
 
 function Checkout() {
