@@ -22,7 +22,7 @@ const IMAGES = {
   paneer: "https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?auto=format&fit=crop&w=600&q=80",
   fruit_basket: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=600&q=80",
   baker: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80",
-  farm: "https://images.unsplash.com/photo-1595856453615-5ce82d54ea2c?auto=format&fit=crop&w=600&q=80",
+  farm: "https://imgs.search.brave.com/1jZqpbwp0cv5MEDB2ekUvG5LkQPsCQLI1Os7rtjiQak/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzYx/MjgwMjQ3NTAyZjA3/NmYzMDJiZDIyOS81/ZTJlZGZjMy04ZTk2/LTQ1ZjItYmExZC05/YjBjMmZhODcwYTcv/TGluY29sbitNZWFk/b3cuanBn",
   dairy: "https://images.unsplash.com/photo-1628088062854-d1870b4553da?auto=format&fit=crop&w=600&q=80",
   testimonial1: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
   testimonial2: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
