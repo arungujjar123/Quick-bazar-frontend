@@ -3,11 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./AuthRedesign.css";
 
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
-  (process.env.NODE_ENV === "production"
-    ? "https://tear-isa-kings-bruce.trycloudflare.com"
-    : "http://localhost:5000");
+import { API_BASE_URL } from "../config";
 
 function Login() {
   const [email, setEmail] = useState("");

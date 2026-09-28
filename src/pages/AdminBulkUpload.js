@@ -4,11 +4,7 @@ import axios from "axios";
 import "./AdminShared.css";
 import "./AdminBulkUpload.css";
 
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
-  (process.env.NODE_ENV === "production"
-    ? "https://tear-isa-kings-bruce.trycloudflare.com"
-    : "http://localhost:5000");
+import { API_BASE_URL } from "../config";
 
 function AdminBulkUpload() {
   const [shops, setShops] = useState([]);

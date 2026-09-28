@@ -4,11 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./OffersRedesign.css";
 
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
-  (process.env.NODE_ENV === "production"
-    ? "https://tear-isa-kings-bruce.trycloudflare.com"
-    : "http://localhost:5000");
+import { API_BASE_URL } from "../config";
 
 function Offers() {
   const [products, setProducts] = useState([]);
