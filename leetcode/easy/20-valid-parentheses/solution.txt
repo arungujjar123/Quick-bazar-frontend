@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isValid(string s) {
+
+        stack<char> st;
+
+        for (int i = 0; i < s.size(); i++) {
+
+            // Opening brackets
+            if (s[i] == '(' || s[i] == '[' || s[i] == '{') {
+                st.push(s[i]);
+            }
+
+            // Closing brackets
+            else {
+
+                // Stack empty means no opening bracket available
+                if (st.empty())
+                    return false;
+
+                // Check matching brackets
+       
