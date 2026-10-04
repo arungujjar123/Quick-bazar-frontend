@@ -1,0 +1,31 @@
+utput);
+            return;
+        }
+
+        // -----------------------------
+        // Exclude Case
+        // Current element ko subset mein include nahi karna.
+        // -----------------------------
+        solve(nums, output, index + 1, ans);
+
+        // -----------------------------
+        // Include Case
+        // Current element ko subset mein include karna.
+        // -----------------------------
+        output.push_back(nums[index]);
+
+        solve(nums, output, index + 1, ans);
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+
+        vector<vector<int>> ans;   // Final answer
+        vector<int> output;        // Current subset
+
+        int index = 0;
+
+        solve(nums, output, index, ans);
+
+        return ans;
+    }
+};
