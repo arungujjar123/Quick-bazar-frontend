@@ -1,0 +1,25 @@
+{
+  "title": "Same Tree",
+  "titleSlug": "same-tree",
+  "frontendQuestionId": "100",
+  "leetcodeUrl": "https://leetcode.com/problems/same-tree/",
+  "difficulty": "Easy",
+  "topics": [
+    "Tree",
+    "Depth-First Search",
+    "Breadth-First Search",
+    "Binary Tree"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-04T15:00:12.632Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-04T15:00:14.910Z"
+}

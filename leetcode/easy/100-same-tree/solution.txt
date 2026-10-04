@@ -1,0 +1,51 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *
+ *     int val;
+ *
+ *     TreeNode *left;
+ *
+ *     TreeNode *right;
+ *
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ *     right(right) {}
+ *
+ * };
+ */
+
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+
+        // Base case:
+        // Agar dono nodes NULL hain,
+        // iska matlab dono trees ke is point par kuch bhi nahi hai.
+        // Therefore, dono same hain.
+        if (p == NULL && q == NULL) {
+            return true;
+        }
+
+        // Agar p NULL hai but q NULL nahi hai,
+        // toh dono…in toh right = true.
+        bool right = isSameTree(p->right, q->right);
+
+        // Current nodes ki values compare karo.
+        // Agar values same hain toh value = true.
+        bool value = p->val == q->val;
+
+        // Current trees tabhi same honge jab:
+        // 1. Left subtree same ho
+        // 2. Right subtree same ho
+        // 3. Current nodes ki values same ho
+        if (left && right && value) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+};
