@@ -1,0 +1,20 @@
+class Solution {
+public:
+
+    // Check whether left and right subtrees are mirror images
+    bool check(TreeNode* l, TreeNode* r) {
+
+        // Dono NULL hain -> symmetric
+        if (l == NULL && r == NULL) {
+            return true;
+        }
+
+        // Ek NULL hai aur doosra nahi -> not symmetric
+        if (l == NULL || r == NULL) {
+            return false;
+        }
+
+        // 3 conditions:
+        // 1. Values same honi chahiye
+        // 2. Left ka left <-> Right ka right
+        // 3.
