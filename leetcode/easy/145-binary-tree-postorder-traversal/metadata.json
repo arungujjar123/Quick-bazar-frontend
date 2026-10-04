@@ -1,0 +1,25 @@
+{
+  "title": "Binary Tree Postorder Traversal",
+  "titleSlug": "binary-tree-postorder-traversal",
+  "frontendQuestionId": "145",
+  "leetcodeUrl": "https://leetcode.com/problems/binary-tree-postorder-traversal/",
+  "difficulty": "Easy",
+  "topics": [
+    "Stack",
+    "Tree",
+    "Depth-First Search",
+    "Binary Tree"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-04T14:59:01.323Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-04T14:59:05.366Z"
+}
