@@ -1,0 +1,19 @@
+gh++;
+            }
+
+            // Minimum open brackets negative nahi ho sakte
+            // Example: "*)" mein low negative ho sakta hai
+            low = max(0, low);
+
+            // Agar maximum bhi negative ho gaya,
+            // to extra ')' aa chuka hai -> invalid
+            if (high < 0) {
+                return false;
+            }
+        }
+
+        // Agar minimum possible unmatched '(' zero hai,
+        // to koi valid combination exist karta hai
+        return low == 0;
+    }
+};
