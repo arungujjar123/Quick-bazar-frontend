@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int scoreOfParentheses(string s) {
+
+        // Stack previous/outer parentheses ka score
+        // temporarily store karega.
+        stack<int> stack;
+
+        // Current level ka score
+        int cur = 0;
+
+        for (char i : s) {
+
+            // ------------------------------------------------
+            // Opening '(' mila
+            // ------------------------------------------------
+            if (i == '(') {
+
+                // Current level ka score sta
