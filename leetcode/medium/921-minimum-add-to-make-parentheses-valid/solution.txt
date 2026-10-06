@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minAddToMakeValid(string s) {
+
+        stack<char> st;
+
+        // Aise ')' jinke liye '(' nahi mila
+        int closing = 0;
+
+        for (char ch : s) {
+
+            if (ch == '(') {
+
+                // Opening bracket ko stack mein rakho
+                st.push(ch);
+
+            } else {
+
+                // Agar matching '(' available hai
+                if (!st.empty()) {
+                    st.pop();
+                }
+
+                // '(' available nahi h
