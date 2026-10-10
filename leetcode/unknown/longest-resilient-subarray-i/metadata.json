@@ -1,0 +1,20 @@
+{
+  "title": "longest-resilient-subarray-i",
+  "titleSlug": "longest-resilient-subarray-i",
+  "frontendQuestionId": null,
+  "leetcodeUrl": "https://leetcode.com/problems/longest-resilient-subarray-i/",
+  "difficulty": "Unknown",
+  "topics": [],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-10T15:14:10.630Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-10T15:14:13.765Z"
+}
