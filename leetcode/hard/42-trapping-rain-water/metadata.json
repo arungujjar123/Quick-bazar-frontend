@@ -1,0 +1,26 @@
+{
+  "title": "Trapping Rain Water",
+  "titleSlug": "trapping-rain-water",
+  "frontendQuestionId": "42",
+  "leetcodeUrl": "https://leetcode.com/problems/trapping-rain-water/",
+  "difficulty": "Hard",
+  "topics": [
+    "Array",
+    "Two Pointers",
+    "Dynamic Programming",
+    "Stack",
+    "Monotonic Stack"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-12T14:35:12.231Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-12T14:35:14.089Z"
+}
