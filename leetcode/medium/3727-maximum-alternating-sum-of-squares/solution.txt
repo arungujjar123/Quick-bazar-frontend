@@ -1,0 +1,22 @@
+class Solution {
+public:
+    long long maxAlternatingSum(vector<int>& nums) {
+        int n = nums.size();
+        vector<long long> ans;
+        for (int i = 0; i < n; i++) {
+            long long number = 1LL * nums[i] * nums[i];
+            ans.push_back(number);
+        }
+        sort(ans.begin(), ans.end());
+        long long maxsum = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (i < (n + 1) / 2) {
+                maxsum += ans[n - 1 - i];
+            } else {
+                maxsum -= ans[n - 1 - i];
+            }
+        }
+        return maxsum;
+    }
+};
