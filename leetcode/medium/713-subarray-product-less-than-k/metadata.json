@@ -1,0 +1,25 @@
+{
+  "title": "Subarray Product Less Than K",
+  "titleSlug": "subarray-product-less-than-k",
+  "frontendQuestionId": "713",
+  "leetcodeUrl": "https://leetcode.com/problems/subarray-product-less-than-k/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Binary Search",
+    "Sliding Window",
+    "Prefix Sum"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-19T18:12:23.593Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-19T18:12:30.063Z"
+}

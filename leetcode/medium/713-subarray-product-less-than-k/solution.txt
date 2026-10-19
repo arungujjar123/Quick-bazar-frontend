@@ -1,0 +1,29 @@
+Jab tak product k se chhota nahi hota,
+            // left side se elements remove karo
+            while (product >= k) {
+                product /= nums[left];
+                left++;
+            }
+
+            // Current right par end hone wale valid subarrays:
+            // [right], [right-1 ... right], ... [left ... right]
+            // Inki total sankhya = right - left + 1
+            count += right - left + 1;
+        }
+
+        // Total valid subarrays return karo
+        return count;
+        // ========= brute force 
+        // int count = 0;
+        // int n = nums.size();
+
+        // for (int i = 0; i < n; i++) {
+        //     long long product = 1;
+
+        //     for (int j = i; j >= 0; j--) {
+        //         product *= nums[j];
+
+        //         if (product < k)
+        //             count++;
+        //         else
+        //             break;   // ❌ This break is actually not always valid because incase second wala element se hi 100 aa jaye toh aage nahi jaye
