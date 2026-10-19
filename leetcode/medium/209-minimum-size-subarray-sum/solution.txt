@@ -1,0 +1,17 @@
+valid window ki length calculate karo
+                // Length = right - left + 1
+                minLen = min(minLen, right - left + 1);
+
+                // Leftmost element ko sum se remove karo
+                sum -= nums[left];
+
+                // Left pointer ko aage move karo
+                left++;
+            }
+        }
+
+        // Agar koi valid subarray nahi mila, toh 0 return karo
+        // Otherwise minimum length return karo
+        return minLen == INT_MAX ? 0 : minLen;
+    }
+};
