@@ -1,0 +1,22 @@
+{
+  "title": "Max Consecutive Ones",
+  "titleSlug": "max-consecutive-ones",
+  "frontendQuestionId": "485",
+  "leetcodeUrl": "https://leetcode.com/problems/max-consecutive-ones/",
+  "difficulty": "Easy",
+  "topics": [
+    "Array"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-19T12:19:07.376Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-19T12:19:09.178Z"
+}
