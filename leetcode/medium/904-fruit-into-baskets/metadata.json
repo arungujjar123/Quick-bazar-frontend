@@ -1,0 +1,24 @@
+{
+  "title": "Fruit Into Baskets",
+  "titleSlug": "fruit-into-baskets",
+  "frontendQuestionId": "904",
+  "leetcodeUrl": "https://leetcode.com/problems/fruit-into-baskets/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Hash Table",
+    "Sliding Window"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-20T09:52:36.065Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-20T09:52:38.985Z"
+}

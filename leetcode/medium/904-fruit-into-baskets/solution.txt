@@ -1,0 +1,18 @@
+            // current fruit ke frequency increase karo 
+            mp[fruits[right]]++;
+
+            while(mp.size()>2){
+                mp[fruits[left]]--;
+                // agar kisi fruits ki frequency 0 ho gayi 
+                // toh use map se remove kar do 
+                if(mp[fruits[left]]==0){
+                    mp.erase(fruits[left]);
+                }
+                left++;
+            }
+            maxlen = max(maxlen,right-left+1);
+    
+        }
+         return maxlen;
+    }
+};
