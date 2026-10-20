@@ -1,0 +1,20 @@
+{
+  "title": "Three Fibonacci Sum",
+  "titleSlug": "three-fibonacci-sum",
+  "frontendQuestionId": "4078",
+  "leetcodeUrl": "https://leetcode.com/problems/three-fibonacci-sum/",
+  "difficulty": "Easy",
+  "topics": [],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-20T10:23:44.633Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "HINT",
+  "helpLabel": "Needed hint",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-20T10:23:54.255Z"
+}
