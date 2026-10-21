@@ -1,0 +1,18 @@
+ hai,
+        // toh sorted banane ke liye 3 operations lagenge
+        if (s[0] == mx && maxCount == 1 &&
+            s[n - 1] == mn && minCount == 1) {
+            return 3;
+        }
+
+        // Agar first character sabse chhota hai
+        // YA last character sabse bada hai,
+        // toh ek operation mein string sort ho sakti hai
+        if (s[0] == mn || s[n - 1] == mx) {
+            return 1;
+        }
+
+        // Baaki unsorted cases mein 2 operations lagenge
+        return 2;
+    }
+};
