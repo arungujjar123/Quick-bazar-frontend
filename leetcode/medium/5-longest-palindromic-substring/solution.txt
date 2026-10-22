@@ -1,0 +1,23 @@
+ki trick Jab expansion rukta hai,
+        //     left aur right dono palindrome ke bahar hote hain.-
+        //         Starting index = left + 1 - Length = right - left -
+        //                                              1 Ek aur chhota example
+        //     : s = "cbbd" mein even center se
+        //           "bb" milta hai.Expansion rukne par left = 0,
+        //                  right = 3 hoga.Toh substr(1, 2) → "bb".
+
+        //                          Yahi reason hai ki hum left +
+        //                          1 aur right - left -
+        //                          1 use karte hain.
+                                 return s.substr(
+                                     left + 1, right - left - 1);
+    }
+
+    string longestPalindrome(string s) {
+        string ans = "";
+
+        // Har index ko possible center maan kar check karo
+        for (int i = 0; i < s.length(); i++) {
+
+            // Odd-length palindrome: jaise "aba"
+            string odd = expand(s, i, i)
