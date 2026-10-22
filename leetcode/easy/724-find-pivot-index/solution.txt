@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        int n = nums.size();
+        // optimised solution hai iska joki prefix sum se hoga like in o(n) time complexity mein 
+        int totalsum=0;
+        for(int num:nums){
+            totalsum +=num;
+        }
+           int leftsum=0;
+        for(int i=0;i<n;i++){
+            int rightsum = totalsum-leftsum-nums[i];
+            if(leftsum==rightsum){
+                return i;
+            }else{
+                leftsum +=nums[i];
+            }
+        }
+       
+
+        // for (int i = 0; i < n; i++) {
+        //     int leftsum = 0;
+        //     for (int j = 0; j < i; j++) {
+        //         leftsum += nums[j];
+        //     }
+
+        //     int rightsum =
