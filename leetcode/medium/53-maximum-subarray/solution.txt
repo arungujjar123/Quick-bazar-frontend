@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        // kandane algorithms
+       // maximum subarray sum ko store karega
+        int maxSum = nums[0];
+
+        // current subarray ka running sum
+        int currsum = 0;
+
+        for (int num : nums) {
+
+            // current element ko running sum mein add karo
+            currsum += num;
+
+            // agar current sum ab tak ka sabse bada sum hai
+            // toh maxSum ko update kar do
+            maxSum = max(maxSum, currsum);
+
+            // agar current sum negative ho gaya hai 
