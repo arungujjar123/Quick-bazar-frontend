@@ -1,0 +1,15 @@
+o characters ko lowercase mein convert karke compare karo
+            // Taaki uppercase aur lowercase ka difference ignore ho
+            if (tolower(s[start]) != tolower(s[end])) {
+                return false;  // Characters match nahi hue
+            } else {
+                // Characters match hue, ab dono pointers move karo
+                start++;
+                end--;
+            }
+        }
+
+        // Agar loop complete ho gaya, toh string palindrome hai
+        return true;
+    }
+};
