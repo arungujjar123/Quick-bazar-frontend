@@ -1,0 +1,24 @@
+s Solution {
+public:
+    int maxAbsoluteSum(vector<int>& nums) {
+
+        int currMax = 0;
+        int currMin = 0;
+
+        int maxSum = 0;
+        int minSum = 0;
+
+        for(int x : nums) {
+
+            // Maximum subarray sum
+            currMax = max(x, currMax + x);
+            maxSum = max(maxSum, currMax);
+
+            // Minimum subarray sum
+            currMin = min(x, currMin + x);
+            minSum = min(minSum, currMin);
+        }
+
+        return max(maxSum, abs(minSum));
+    }
+};

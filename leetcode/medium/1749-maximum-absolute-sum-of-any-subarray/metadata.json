@@ -1,0 +1,23 @@
+{
+  "title": "Maximum Absolute Sum of Any Subarray",
+  "titleSlug": "maximum-absolute-sum-of-any-subarray",
+  "frontendQuestionId": "1749",
+  "leetcodeUrl": "https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Dynamic Programming"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-22T13:20:39.276Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-22T13:20:44.467Z"
+}
