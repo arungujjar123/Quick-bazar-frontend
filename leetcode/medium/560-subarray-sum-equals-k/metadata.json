@@ -1,0 +1,24 @@
+{
+  "title": "Subarray Sum Equals K",
+  "titleSlug": "subarray-sum-equals-k",
+  "frontendQuestionId": "560",
+  "leetcodeUrl": "https://leetcode.com/problems/subarray-sum-equals-k/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Hash Table",
+    "Prefix Sum"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-22T11:10:25.934Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-22T11:11:01.383Z"
+}

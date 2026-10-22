@@ -1,0 +1,22 @@
+class Solution {
+public:
+    // count +=
+    //     mp[sum - k] → purane prefix sums ki help se valid subarrays count karta
+    //         hai.
+
+    //     mp[sum]++ → current prefix sum ko future ke liye store karta hai.int
+       int subarraySum(vector<int> & nums, int k) {
+        unordered_map<int, int> mp;
+
+        int sum = 0;
+        int count = 0;
+        // Initially 0 prefix sum ek baar exist karta hai
+        // Taaki starting index se valid subarray bhi count ho sake
+        mp[0] = 1;
+
+        for (int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+
+            // idhar ye formaula lagta  hai like subarraysum = current sum
+            // -previous sum toh isko aise likh sakte hai  previous = sum-k;
+   
