@@ -1,0 +1,39 @@
+; i < n; i++) {
+            sum += nums[i];
+
+            int rem = sum % k;
+
+            // Agar same remainder pehle aa chuka hai
+            if (mp.find(rem) != mp.end()) {
+
+                // Subarray ki length kam se kam 2 honi chahiye
+                if (i - mp[rem] >= 2) {
+                    return true;
+                }
+
+            } else {
+                // Sirf pehli baar aane wala index store karo
+                mp[rem] = i;
+            }
+        }
+
+        return false;
+    }
+};
+
+// class Solution {
+// public:
+//     bool checkSubarraySum(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         int sum = 0;
+//         unordered_map<int, int> mp;
+//         // Initial remainder 0 ko index -1 par store karo
+//         mp[0] = -1;
+
+//         for (int i = 0; i < n; i++) {
+//             sum += nums[i];
+
+//             int rem = sum % k;
+//             // agar reminander phele se exist karta hai
+//             if (mp.find(rem) != mp.end()) {
+//                

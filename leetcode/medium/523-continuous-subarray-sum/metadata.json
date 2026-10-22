@@ -1,0 +1,26 @@
+{
+  "title": "Continuous Subarray Sum",
+  "titleSlug": "continuous-subarray-sum",
+  "frontendQuestionId": "523",
+  "leetcodeUrl": "https://leetcode.com/problems/continuous-subarray-sum/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Hash Table",
+    "Math",
+    "Prefix Sum",
+    "Pigeonhole Principle"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-22T12:14:21.885Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-22T12:14:23.777Z"
+}
