@@ -1,0 +1,24 @@
+{
+  "title": "Sum of Beauty of All Substrings",
+  "titleSlug": "sum-of-beauty-of-all-substrings",
+  "frontendQuestionId": "1781",
+  "leetcodeUrl": "https://leetcode.com/problems/sum-of-beauty-of-all-substrings/",
+  "difficulty": "Medium",
+  "topics": [
+    "Hash Table",
+    "String",
+    "Counting"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-22T18:01:45.491Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-22T18:01:47.368Z"
+}

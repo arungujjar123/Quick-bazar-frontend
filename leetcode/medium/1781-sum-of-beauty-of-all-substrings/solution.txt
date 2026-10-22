@@ -1,0 +1,18 @@
+f 26 lowercase characters check karo
+                for (int k = 0; k < 26; k++) {
+
+                    // Zero frequency ko ignore karo
+                    if (freq[k] > 0) {
+                        maxFreq = max(maxFreq, freq[k]);
+                        minFreq = min(minFreq, freq[k]);
+                    }
+                }
+
+                // Current substring ki beauty add karo
+                totalBeauty += maxFreq - minFreq;
+            }
+        }
+
+        return totalBeauty;
+    }
+};
