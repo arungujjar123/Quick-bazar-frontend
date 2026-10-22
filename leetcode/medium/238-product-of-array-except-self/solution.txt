@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<int> prefix(n,1);
+        vector<int>suffix(n,1);
+        vector<int>answer(n,1);
+
+        // prefix product : left side ke element ka product 
+        for(int i=1;i<n;i++){
+            prefix[i] = prefix[i-1]*nums[i-1];
+        }
+         // Suffix product: right side ke elements ka product
+        for (int i = n - 2; i >= 0; i--) {
+            suffix[i] = suffix[i + 1] * nums[i + 1];
+        }
+        // prefix aur suffix ko multiply karo 
+        for(int i=0;i<n;i++){
+            answer[i] = prefix[i]*suffix[i];
+        }
+
+        return answer;
+        // =========================================================================
+        // brute foce
+        // int n=nums.size();
+        // Answer array
+        // vector<int> ans(n, 1);
+
+        // // Har element ke liye
+        // for (int i = 0; i < n; i++) {
+
+        //     // Baaki elements ka product
+        //     for (int j = 0; j < n; j++) {
+
+        //         // nums[i] ko exclude karna hai
+        //         if (i != j) {
+        //             ans[i] *= nums[j];
+        // 
