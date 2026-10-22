@@ -1,4 +1,23 @@
-o characters ko lowercase mein convert karke compare karo
+ing ke starting index se
+        int end = s.size() - 1;  // String ke last index se
+
+        while (start <= end) {
+
+            // Agar starting character letter ya digit nahi hai,
+            // toh usko skip karke aage badho
+            if (!isalnum(s[start])) {
+                start++;
+                continue;
+            }
+
+            // Agar ending character letter ya digit nahi hai,
+            // toh usko skip karke peeche aao
+            if (!isalnum(s[end])) {
+                end--;
+                continue;
+            }
+
+            // Dono characters ko lowercase mein convert karke compare karo
             // Taaki uppercase aur lowercase ka difference ignore ho
             if (tolower(s[start]) != tolower(s[end])) {
                 return false;  // Characters match nahi hue
@@ -9,7 +28,4 @@ o characters ko lowercase mein convert karke compare karo
             }
         }
 
-        // Agar loop complete ho gaya, toh string palindrome hai
-        return true;
-    }
-};
+        // Agar loop complete ho ga
