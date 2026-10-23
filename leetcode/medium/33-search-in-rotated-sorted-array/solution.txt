@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int n = nums.size();
+        int st = 0;
+        int end =n - 1;
+        while (st <= end) {
+            int mid = st + (end - st) / 2;
+            // target mil gaya
+            if (nums[mid] == target)
+                return mid;
+
+            // check left is sorted or not
+            if (nums[st] <= nums[mid]) {
+                // taget left sorted mein hai
+                if (nums[st] <= target && target < nums[mid]) {
+                    end = mid - 1;
+                }
+                // target right half mein hai
+                else {
+                    st = mid + 1;
+                }
+            }
+            /// otherwise right half mein hai element
+            else{
+                if(nums[mid]<target && target<=nums[end]){
+                    st=mid+1;
+                }else{
+                    end=mid-1;
+                }
+            }
+        }
+        return -1;
+    }
+};
