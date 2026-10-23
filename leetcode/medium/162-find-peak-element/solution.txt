@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+
+        int n = nums.size();
+
+        // Search space:
+        // Initially poora array consider karenge.
+        int l = 0;
+        int r = n - 1;
+
+        // Jab tak l < r hai tab tak search karte rahenge.
+        // l == r hone par sirf ek element bachega,
+        // wahi peak hoga.
+        while (l < r) {
+
+            // Mid calculate kar rahe hain.
+            // (l + r) ki jagah ye overflow se safer hai.
+            int mid = l + (r - l) / 2;
+
+            // Agar nums[mid] < nums[mid + 1]
+            // iska matlab hum increasing slope par hain.
+            //
+            // Example:
+            //        /
+            //       /
+            //   ___/ 
+            //      mid mid+1
+            //
+            // Peak definitely right side mein hogi.
+            // Isliye left ko mid+1 par s
