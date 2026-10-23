@@ -1,20 +1,18 @@
-ight) {
-        ListNode* dummy = new ListNode(0);
-        dummy->next = head;
+r->next;
 
-        ListNode * prev = dummy;
-        // Left se pehle wale node tak jao
-
-        for (int i = 1; i < left; i++) {
-            prev = prev->next;
-        }
-        ListNode * curr = prev->next;
-        for(int i=0;i<right-left;i++){
-            ListNode * temp = curr->next;
+            // Curr ka next, temp ke next se connect karo
+            // Isse temp current position se nikal jayega
             curr->next = temp->next;
+
+            // Temp ko reversed part ke starting node se jodo
             temp->next = prev->next;
+
+            // Prev ka next temp kar do
+            // Ab temp reversed part ke start mein aa jayega
             prev->next = temp;
         }
+
+        // Dummy ke next se actual reversed list milegi
         return dummy->next;
     }
 };
