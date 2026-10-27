@@ -1,0 +1,38 @@
+                // Last occurrence ke liye RIGHT search karo
+                left = mid + 1;
+            }
+            else if (nums[mid] < target) {
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+
+
+    vector<int> searchRange(vector<int>& nums, int target) {
+
+        return {
+            findfirst(nums, target),
+            findlast(nums, target)
+        };
+    }
+
+    /*
+    Interview Approach:
+
+    First occurrence:
+    - target mila → ans save karo → LEFT search karo.
+
+    Last occurrence:
+    - target mila → ans save karo → RIGHT search karo.
+
+    Target nahi mila → -1.
+
+    TC: O(log n)
+    SC: O(1)
+    */
+};
