@@ -1,0 +1,36 @@
+s(string num, int k) {
+        stack<char> st;
+
+        // Step 1: har digit ko process karo
+        for (char c : num) {
+            // jab tak top bada hai aur k bacha hai, top hatao
+            while (k > 0 && !st.empty() && st.top() > c) {
+                st.pop();
+                k--;
+            }
+            st.push(c);
+        }
+
+        // Step 2: k abhi bhi bacha hai toh upar (end) se hatao
+        while (k > 0 && !st.empty()) {
+            st.pop();
+            k--; // 12345
+        }
+
+        // Step 3: stack se string banao (ulta order milta hai, isliye reverse)
+        string ans = "";
+        while (!st.empty()) {
+            ans.push_back(st.top());
+            st.pop();
+        }
+        reverse(ans.begin(), ans.end());
+
+        // Step 4: leading zeros hatao
+        int start = 0;
+        while (start < ans.size() && ans[start] == '0') start++;
+        ans = ans.substr(start);
+
+        // Step 5: kuch nahi bacha toh "0"
+        return ans.empty() ? "0" : ans;
+    }
+};
