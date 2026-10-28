@@ -1,0 +1,24 @@
+{
+  "title": "Daily Temperatures",
+  "titleSlug": "daily-temperatures",
+  "frontendQuestionId": "739",
+  "leetcodeUrl": "https://leetcode.com/problems/daily-temperatures/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Stack",
+    "Monotonic Stack"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-28T13:47:59.357Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-28T13:48:01.201Z"
+}
