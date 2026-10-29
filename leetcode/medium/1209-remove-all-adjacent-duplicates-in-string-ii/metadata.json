@@ -1,0 +1,23 @@
+{
+  "title": "Remove All Adjacent Duplicates in String II",
+  "titleSlug": "remove-all-adjacent-duplicates-in-string-ii",
+  "frontendQuestionId": "1209",
+  "leetcodeUrl": "https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string-ii/",
+  "difficulty": "Medium",
+  "topics": [
+    "String",
+    "Stack"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-29T12:34:29.684Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-29T12:34:31.529Z"
+}
