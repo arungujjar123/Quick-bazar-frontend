@@ -1,0 +1,23 @@
+{
+  "title": "Min Stack",
+  "titleSlug": "min-stack",
+  "frontendQuestionId": "155",
+  "leetcodeUrl": "https://leetcode.com/problems/min-stack/",
+  "difficulty": "Medium",
+  "topics": [
+    "Stack",
+    "Design"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-29T14:17:32.675Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-29T14:17:42.216Z"
+}
