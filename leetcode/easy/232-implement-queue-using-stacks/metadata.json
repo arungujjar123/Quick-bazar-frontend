@@ -1,0 +1,24 @@
+{
+  "title": "Implement Queue using Stacks",
+  "titleSlug": "implement-queue-using-stacks",
+  "frontendQuestionId": "232",
+  "leetcodeUrl": "https://leetcode.com/problems/implement-queue-using-stacks/",
+  "difficulty": "Easy",
+  "topics": [
+    "Stack",
+    "Design",
+    "Queue"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-29T14:22:22.816Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "PENDING_SELF_REPORT",
+  "helpLabel": "Pending self report",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-29T14:22:24.852Z"
+}

@@ -1,0 +1,60 @@
+class MyQueue {
+    stack<int> s1;
+    stack<int> s2;
+
+public:
+
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+
+        /*
+            APPROACH:
+
+            Queue follows FIFO:
+                First In -> First Out
+
+            Stack follows LIFO:
+                Last In -> First Out
+
+            Hume stack ka use karke queue banana hai.
+
+            Humara goal:
+                s1 ka TOP = Queue ka FRONT
+
+            Example:
+
+                Queue:
+                FRONT -> 1  2  3…  Queue ka FRONT hamesha s1 ke TOP par hai.
+
+            Isliye directly TOP ko remove kar do.
+        */
+
+        int ans = s1.top();
+        s1.pop();
+
+        return ans;
+    }
+    
+    int peek() {
+
+        /*
+            Queue ka FRONT = s1 ka TOP
+
+            Remove nahi karna hai,
+            sirf value return karni hai.
+        */
+
+        return s1.top();
+    }
+    
+    bool empty() {
+
+        // Agar s1 empty hai,
+        // toh queue bhi empty hai.
+
+        return s1.empty();
+    }
+};
