@@ -1,24 +1,36 @@
-class Solution {
-public:
-    string removeDuplicates(string s, int k) {
-        // brute force
-        int n = s.size();
-        int i=0;
-        while(i<(int)s.size()){
-             
-             int count=1;
-             while(i+count < (int)s.size() && s[i] == s[i+count]){
-                count++;
-             }
-            
-            if(count>=k){
-                s.erase(i,k);
-
-                i = max(0,i-k+1);
-            }else{
-                i++;
+ty() && st.top().first == ch){
+                st.top().second++;
+            }
+            else{
+                st.push({ch,1});
+            }
+            if(st.top().second == k){
+                st.pop();
             }
         }
-        return s;
-    }
-};
+        // stack se answer banao 
+        string ans = "";
+
+        while(!st.empty()){
+            for(int i=0;i<st.top().second;i++){ // idhar hum {c,2} par 2 bar iterate kar rahe hai  0<2 ans=c 1<2 ans = cc 2<2 false condition now ab pop kar do {c,2} pure pair ko 
+                ans +=st.top().first; 
+            }
+            st.pop(); // ye pop pura pair htaa deta hai {c,2} for example 
+        }
+        reverse(ans.begin(),ans.end());
+
+        return ans;
+         
+
+            
+        // // brute force
+        // int n = s.size();
+        // int i=0;
+        // while(i<(int)s.size()){
+
+        //      int count=1;
+        //      while(i+count < (int)s.size() && s[i] == s[i+count]){
+        //         count++;
+        //      }
+
+        //     if(c
