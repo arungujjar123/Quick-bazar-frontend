@@ -1,0 +1,24 @@
+{
+  "title": "Asteroid Collision",
+  "titleSlug": "asteroid-collision",
+  "frontendQuestionId": "735",
+  "leetcodeUrl": "https://leetcode.com/problems/asteroid-collision/",
+  "difficulty": "Medium",
+  "topics": [
+    "Array",
+    "Stack",
+    "Simulation"
+  ],
+  "language": "Unknown",
+  "verdict": "Accepted",
+  "submissionId": null,
+  "submittedAt": "2026-10-29T09:59:16.462Z",
+  "runtimeMs": null,
+  "memoryKb": null,
+  "totalCorrect": null,
+  "totalTestcases": null,
+  "helpType": "NONE",
+  "helpLabel": "Solved solo",
+  "focusSeconds": null,
+  "syncedAt": "2026-10-29T09:59:41.783Z"
+}

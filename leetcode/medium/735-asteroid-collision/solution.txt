@@ -1,0 +1,26 @@
+
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        // ================= Brute Force Approach =================
+
+        int n = asteroids.size();
+        bool changed = true;
+
+        // Jab tak koi collision hota rahe, loop chalao
+        while (changed) {
+            changed = false;
+
+            for (int i = 0; i < (int)asteroids.size() - 1; i++) {
+
+                // Collision tabhi hoga jab left asteroid right
+                // move kar raha ho aur right asteroid left move kare
+                if (asteroids[i] > 0 && asteroids[i + 1] < 0) {
+
+                    int left = asteroids[i];
+                    int right = asteroids[i + 1];
+
+                    // Dono asteroids ka size equal hai
+                    if (left == abs(right)) {
+                        asteroids.erase(asteroids.begin() + i,
+                                      
