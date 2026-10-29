@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string removeDuplicates(string s) {
+
+        stack<char> st;
+
+        for (char ch : s) {
+
+            // Agar stack empty hai,
+            // toh directly character push karo.
+            if (st.empty()) {
+                st.push(ch);
+            }
+
+            // Agar current character aur top same hain,
+            // toh duplicate pair remove karo.
+            else if (st.top() == ch) {
+                st.pop();
+            }
+
+            // Agar same nahi hain,
