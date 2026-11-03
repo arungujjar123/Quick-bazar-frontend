@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        
+        int maxelement=0;
+        int moves=0;
+        
+        for(int i=0;i<nums.size();i++){
+            maxelement = max(maxelement,nums[i]);
+        }
+        for(int i=0;i<nums.size();i++){
+            int difference = maxelement-nums[i];
+            moves +=difference;
+        }
+        return moves;
+    }
+};
