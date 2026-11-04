@@ -1,22 +1,21 @@
-class Solution {
-public:
-    // count +=
-    //     mp[sum - k] → purane prefix sums ki help se valid subarrays count karta
-    //         hai.
+        // prev = currsum - k
+            int prev = currsum - k;
 
-    //     mp[sum]++ → current prefix sum ko future ke liye store karta hai.int
-       int subarraySum(vector<int> & nums, int k) {
-        unordered_map<int, int> mp;
+            // Step 3: Check if required previous prefix
+            // sum exists in HashMap
+            if(mp.find(prev) != mp.end()) {
 
-        int sum = 0;
-        int count = 0;
-        // Initially 0 prefix sum ek baar exist karta hai
-        // Taaki starting index se valid subarray bhi count ho sake
-        mp[0] = 1;
+                // Add its frequency because multiple
+                // subarrays can have the same sum
+                count += mp[prev];
+            }
 
-        for (int i = 0; i < nums.size(); i++) {
-            sum += nums[i];
+            // Step 4: Store/update current prefix sum
+            // in HashMap for future subarrays
+            mp[currsum]++;
+        }
 
-            // idhar ye formaula lagta  hai like subarraysum = current sum
-            // -previous sum toh isko aise likh sakte hai  previous = sum-k;
-   
+        // Step 5: Return total valid subarrays
+        return count;
+    }
+};
