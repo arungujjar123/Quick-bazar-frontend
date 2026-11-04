@@ -1,0 +1,10 @@
+ye n+1 jo hai woh n+1 1 task hai baki n woh space hai jo bane hai like jinke baad same element 
+        // repeat karega like A->-> a ke baad 2 gap so it will be  n+1=3
+        // and count ka matalb hai woh element jinki frequncy equal ho woh last mein jayegne like jaise 
+        // a->b->idle->a->b->idle->a->b yaha a aur b last mein aa gaye 
+
+        // Step 5: Return the maximum of total tasks
+        // and calculated minimum intervals
+        return max((int)tasks.size(), result);
+    }
+};
