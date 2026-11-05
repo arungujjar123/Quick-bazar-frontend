@@ -1,21 +1,21 @@
-        // prev = currsum - k
-            int prev = currsum - k;
 
-            // Step 3: Check if required previous prefix
-            // sum exists in HashMap
-            if(mp.find(prev) != mp.end()) {
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
 
-                // Add its frequency because multiple
-                // subarrays can have the same sum
-                count += mp[prev];
-            }
+        // HashMap stores:
+        // Key   = Previous Prefix Sum
+        // Value = Frequency of that Prefix Sum
+        unordered_map<int, int> mp;
 
-            // Step 4: Store/update current prefix sum
-            // in HashMap for future subarrays
-            mp[currsum]++;
-        }
+        // Initially prefix sum is 0.
+        // This helps count subarrays starting from index 0.
+        mp[0] = 1;
 
-        // Step 5: Return total valid subarrays
-        return count;
-    }
-};
+        int currsum = 0;
+        int count = 0;
+
+        // Traverse the array
+        for(int i = 0; i < nums.size(); i++) {
+
+            // Step 1: Calcu
