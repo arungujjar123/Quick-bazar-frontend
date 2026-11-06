@@ -1,6 +1,36 @@
+
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
-        
+        int n = nums.size();
+
+        // Hashmap store karega:
+        // key = remainder
+        // value = kitni baar ye remainder aaya hai
+
+        unordered_map<int, int> mp;
+
+        // Initially prefix sum = 0 hai,
+        // isliye remainder 0 ek baar present hai.
+        // Ye starting se lekar kisi index tak ke
+        // valid subarray ko count karne mein help karega.
+        mp[0] = 1;
+
+        int prefixsum…i,
+            // toh current prefix sum aur previous prefix sum
+            // ka difference k se divisible hoga.
+            //
+            // Isliye jitni baar ye remainder pehle aaya hai,
+            // utne valid subarrays milenge.
+            if (mp.find(rem) != mp.end()) {
+                count += mp[rem];
+            }
+
+            // Current remainder ki frequency increase karo
+            mp[rem]++;
+        }
+
+        // Total valid subarrays return karo
+        return count;
     }
 };
