@@ -1,0 +1,24 @@
+or (auto it : lists) {
+
+            while (it != nullptr) {
+                minheap.push(it->val);
+                it = it->next;
+            }
+        }
+
+        // Step 2: Create sorted linked list
+        ListNode* dummy = new ListNode(-1);
+        ListNode* curr = dummy;
+
+        while (!minheap.empty()) {
+
+            int top = minheap.top();
+            minheap.pop();
+
+            curr->next = new ListNode(top);
+            curr = curr->next;
+        }
+
+        return dummy->next;
+    }
+};
