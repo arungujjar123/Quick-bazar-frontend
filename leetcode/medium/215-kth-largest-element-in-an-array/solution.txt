@@ -1,14 +1,29 @@
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-       
 
+     // approach 3 priority queue 
+     int n = nums.size();
+      priority_queue<int,vector<int>,greater<int>>minheap;
 
+     // idhar pehele min heap bana liya kthe 
+      for(int i=0;i<k;i++){
+        minheap.push(nums[i]);
+      }
+      for(int i=k;i<=n-1;i++){
+        if(nums[i]>minheap.top()){
+            minheap.pop();
+            minheap.push(nums[i]);
+        }
+      }
+      int topelement = minheap.top();
+      return topelement;
+ 
+        // // without sorting solve karta hun
+        // int n = nums.size();
 
-        // // brute force
-        // int n   = nums.size();
-        // sort(nums.begin(),nums.end());
-         
-        // return nums[n-k];
-    }
-};
+        // for (int i = 0; i < n; i++) {
+
+        //     for (int j = 0; j < n - i - 1; j++) {
+
+        //         if (nums[j] > nums[j + 1]) 
