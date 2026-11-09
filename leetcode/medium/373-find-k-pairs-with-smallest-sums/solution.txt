@@ -1,0 +1,37 @@
+ // Extract k smallest pairs
+        while(!pq.empty() && ans.size() < k) {
+
+            auto top = pq.top();
+            pq.pop();
+
+            int i = top.second.first;
+            int j = top.second.second;
+
+            ans.push_back({nums1[i], nums2[j]});
+
+            // Move to next element in nums2
+            if(j + 1 < m) {
+                pq.push({
+                    nums1[i] + nums2[j + 1],
+                    {i, j + 1}
+                });
+            }
+        }
+
+        return ans;
+
+        /// brute force
+        // int n = nums1.size();
+        // int m = nums2.size();
+        // vector<pair<int,int>>ans;
+
+        // for(int i=0;i<n;i++){
+        //    for(int j=0;j<m;j++){
+        //       ans.push_back({nums1[i],nums2[j]});
+        //    }
+        // }
+        //  // Step 2: Sort pairs according to their sum
+        // sort(ans.begin(), ans.end(), [](auto &a, auto &b) {
+        //     return a.first + a.second < b.first + b.second;
+        // });
+        //  // Step 3
