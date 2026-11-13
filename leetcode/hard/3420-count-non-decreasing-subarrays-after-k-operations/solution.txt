@@ -1,0 +1,16 @@
+     int s = starts[head++];
+                int end = head < tail ? starts[head] : r + 1;
+                water += 1LL * (x - nums[s]) * (end - s);
+            }
+            starts[--head] = l;
+            while (water > k) {  // the right end leaves with its water
+                water -= nums[starts[tail - 1]] - nums[r];
+                if (starts[tail - 1] == r)
+                    --tail;
+                --r;
+            }
+            ans += r - l + 1;
+        }
+        return ans;
+    }
+};
