@@ -390,3 +390,11 @@
 }
 
 .agent-suggestion-chip:hover { border-color: var(--agent-purple); color: var(--agent-purple); background: #f5f7ff; }
+
+/* Inline `code` inside chat messages (was an inline style attribute) */
+.agent-msg-code {
+  background: rgba(99, 102, 241, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}

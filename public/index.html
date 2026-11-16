@@ -4,6 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#6C63FF" />
+    <!--
+      SECURITY: Content-Security-Policy (XSS defence-in-depth).
+      script-src 'self' => sirf hamari apni bundle JS chalegi. Inject kiya hua
+      <script> ya onerror="..." jaisa inline handler browser block kar dega.
+      img-src/connect-src khule hain kyunki product images aur API URL
+      alag-alag domains se aate hain.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https: http:; connect-src 'self' https: http: ws: wss:"
+    />
     <meta name="description" content="QuickBazaar — Discover fresh, local products from neighborhood shops delivered to your doorstep." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -615,14 +615,23 @@ function formatMessage(text) {
 
   if (!cleaned) return "<em>Fetching data...</em>";
 
-  return cleaned
+  // SECURITY: Pehle saara HTML escape karo, uske baad hi apne safe tags lagao.
+  // Isse AI reply / product description / user input mein aaya koi bhi
+  // <script>, <img onerror=...> wagairah sirf text ban kar dikhega, chalega nahi.
+  return escapeHtml(cleaned)
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(/\n/g, "<br/>")
-    .replace(
-      /`(.*?)`/g,
-      '<code style="background:rgba(99,102,241,0.1);padding:2px 6px;border-radius:4px;font-size:0.85em">$1</code>',
-    );
+    .replace(/`(.*?)`/g, '<code class="agent-msg-code">$1</code>');
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 export default SupportChatWidget;
